@@ -28,4 +28,4 @@ export const getPost = () =>
 export const getCategory = () =>
   fetch(`${api}/categories`,{headers})
     .then(res => res.json())
-    .then(data => data.json())
+    
