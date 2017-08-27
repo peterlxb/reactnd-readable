@@ -17,7 +17,7 @@ render() {
 
       <div className="Category">
           <ul className="tabmeun">
-            {console.log("Get Category",categories.categories)}
+          
             {(categories.categories !== undefined) &&
               categories.categories.map((item) =>
               <li key={item.name} className="category-item">{item.name}</li>

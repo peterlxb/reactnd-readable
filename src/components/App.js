@@ -12,17 +12,17 @@ import Category from './Category'
 class App extends Component {
 
   state = {
-    post:[],
+    posts:[],
     categories:[]
   }
 
   componentDidMount() {
-    api.getPost().then((post) => {
-      this.setState({ post })
+    api.getPost().then((posts) => {
+      this.setState({ posts })
     });
 
     api.getCategory().then((categories) => {
-      console.log("From api:", categories)
+      //console.log("From api:", categories)
       this.setState({categories: categories})
     })
   };
@@ -31,9 +31,10 @@ class App extends Component {
 
   render() {
     return (
-
+      <div>
         <Category categories={this.state.categories}/>
-
+        <Post posts={this.state.posts} />
+      </div>
     );
   }
 }

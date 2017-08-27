@@ -6,11 +6,30 @@ body {
 .Category {
   background-color: grey
 }
-ul > li{
-  list-style: none
+ .tabmeun{
+  list-style: none;
+  font-weight:bold;
+  margin-top: 5px;
+  white-space: nowrap;
+  vertical-align: bottom;
 }
 .category-item {
   position: relative;
   display: inline-block;
-  padding: 5px;
+
+  padding: 8px;
+  border:1px solid lightgrey;
+}
+.Post-Area{
+  border: 1px solid grey;
+  padding:3px;
+  margin: 2px;
+}
+.Post-title {
+  border: 1px solid lightgrey;
+
+}
+.Post-Body {
+  margin:2px;
+  padding:2px;
 }
