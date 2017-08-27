@@ -9,12 +9,20 @@ import * as api from '../utils/api'
 
 class Category extends Component {
 
+
+
 render() {
-    //console.log(this.props.categories)
+    const { categories } = this.props
     return (
-      <div>
+
+      <div className="Category">
           <ul className="tabmeun">
-          {console.log(this.props.categories[Object.keys(this.props.categories)])}
+            {console.log("Get Category",categories.categories)}
+            {(categories.categories !== undefined) &&
+              categories.categories.map((item) =>
+              <li key={item.name} className="category-item">{item.name}</li>
+              )
+            }
           </ul>
 
       </div>

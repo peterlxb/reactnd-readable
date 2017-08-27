@@ -13,26 +13,27 @@ class App extends Component {
 
   state = {
     post:[],
-    categories:{}
+    categories:[]
   }
 
   componentDidMount() {
     api.getPost().then((post) => {
       this.setState({ post })
     });
-    api.getCategory().then((categories) => {
-      this.setState({ categories })
-    })
 
+    api.getCategory().then((categories) => {
+      console.log("From api:", categories)
+      this.setState({categories: categories})
+    })
   };
 
 
 
   render() {
     return (
-      <Router>
-        <Category categories={this.state.categories} />
-      </Router>
+
+        <Category categories={this.state.categories}/>
+
     );
   }
 }
