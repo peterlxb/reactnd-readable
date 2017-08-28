@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FaArrowUp from 'react-icons/lib/fa/angle-up'
+import FaArrowDown from 'react-icons/lib/fa/angle-down'
 
 class Post extends Component {
 
@@ -19,8 +21,20 @@ class Post extends Component {
               </div>
               <p>{post.category}</p>
               <h3>{post.author} : <span>{Date.now()}</span></h3>
-              <button>{post.voteScore}</button>
-              <button>{post.deleted}</button>
+              <form>
+
+                <button>
+                <FaArrowUp size={30}/>
+                {post.voteScore}
+                <FaArrowDown size={30}/>
+                </button>
+                <button>{post.deleted} DELETE</button>
+              </form>
+              <div>
+                <ul>
+                  comment
+                </ul>
+              </div>
             </div>
           ))}
         </ul>

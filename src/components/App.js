@@ -13,13 +13,17 @@ class App extends Component {
 
   state = {
     posts:[],
-    categories:[]
+    categories:[],
+    comments:[]
   }
 
   componentDidMount() {
     api.getPost().then((posts) => {
+      console.log("get post when mount", posts)
       this.setState({ posts })
     });
+
+  
 
     api.getCategory().then((categories) => {
       //console.log("From api:", categories)
