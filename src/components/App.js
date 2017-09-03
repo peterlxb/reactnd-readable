@@ -23,7 +23,7 @@ class App extends Component {
       this.setState({ posts })
     });
 
-  
+    
 
     api.getCategory().then((categories) => {
       //console.log("From api:", categories)
