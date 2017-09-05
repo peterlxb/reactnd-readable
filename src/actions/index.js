@@ -1,31 +1,12 @@
-export const ADD_POST = 'ADD_POST'
-export const DELETE_POST = 'DELETE_POST'
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
+export * from './categories'
+export * from './posts'
+export * from './comments'
 
-export function addPost({cagegoty, id, timestamp,title, body, author,voteScore,deleted}) {
-  return {
-    type:ADD_POST,
-    id,
-    timestamp,
-    title,
-    body,
-    author,
-    voteScore,
-    category,
-    deleted,
-  }
-}
+export const SHOW_MESSAGE = 'SHOW_MESSAGE'
 
-export function addComment({id,timestamp,body, author,voteScore, deleted,parentDeleted}) {
+export function setMessage(message) {
   return {
-    type:ADD_COMMENT,
-    id,
-    timestamp,
-    body,
-    author,
-    voteScore,
-    deleted,
-    parentDeleted,
+    type: SHOW_MESSAGE,
+    message
   }
 }
