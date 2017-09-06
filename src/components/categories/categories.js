@@ -6,8 +6,7 @@ const Categories = props =>
         <h3 className="title">Category</h3>
         <div className="container">
         <div className="columns">
-          {console.log("get categories: ", props.categories)}
-          {console.log("get posts: ", typeof(props.posts))}
+        
           {props.categories  &&
             props.categories.map((category, index) => {
               let  numberOfPosts = props.posts.filter(
