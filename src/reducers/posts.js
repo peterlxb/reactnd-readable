@@ -20,7 +20,14 @@ export const posts = (state ={}, action) => {
 
     case SET_POSTS:
       const { posts } = action
-
+      let stateWithPosts = []
+      posts.forEach(post => {
+        stateWithPosts = {
+          ...stateWithPosts,
+          [post.id]: post
+        }
+      })
+      return stateWithPosts
 
     case EDIT_POST:
       const postEdited = action.post

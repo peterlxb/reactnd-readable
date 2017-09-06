@@ -11,7 +11,7 @@ export function setPosts(posts){
   }
 }
 
-export function applyVote(postId.newValue){
+export function applyVote(postId,newValue){
   return{
     type:'APPLY_VOTE',
     newValue
@@ -30,16 +30,13 @@ export function addNewPost(formValues){
   }
 }
 
-export function deletePost(postId){
-  return {
-    type: DELETE_POST,
-    postId
-  }
-}
+export const deletePost = postId => ({
+  type: DELETE_POST,
+  postId
+})
 
-export function editPost(post) {
-  return{
-    type: EDIT_POST,
-    post
-  }
-}
+export const  editPost = post => ({
+  type: EDIT_POST,
+  post
+
+})

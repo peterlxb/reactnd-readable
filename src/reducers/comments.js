@@ -9,10 +9,10 @@ import {
 export const comments = (state={}, action) => {
   switch(action.type) {
     case SET_COMMENTS_TO_POST_ID:
-      const { postId, comment } = action
+      const { postId, comments } = action
       return {
         ...state,
-        [postId]: comment
+        [postId]: comments
       }
 
     case APPLY_VOTE_TO_COMMENT:
@@ -21,14 +21,14 @@ export const comments = (state={}, action) => {
         [action.parentId]: state[action.parentId].map(
           content =>
                   content.id === action.commentId
-                  ? {...content, voteScore: newValue}
+                  ? {...content, voteScore: action.newValue}
                   : content
         )
       }
 
     case ADD_COMMENT:
       const { comment } = action
-      const parentId = action.parentId
+      const parentId = action.postId
 
       const newComment = {
         author: comment.commentAuthor,
@@ -50,10 +50,10 @@ export const comments = (state={}, action) => {
     case UPDATE_COMMENT:
       return {
         ...state,
-        [action.parentId]:state[action.parentId].map(
+        [action.parentId]: state[action.parentId].map(
           content =>
               content.id === action.id
-              ? {...content, body: acton.body, author: action.author}
+              ? {...content, body: action.body, author: action.author}
               : content
         )
       }

@@ -31,7 +31,7 @@ export const votePost = (postId, value) => {
   let option = ''
   option = value === 1 ? 'upVote' : 'downVote'
 
-  return fetch(`${spi}/posts/${postId}`,{
+  return fetch(`${api}/posts/${postId}`,{
     method: 'POST',
     headers: {
       ...headers,
@@ -45,7 +45,7 @@ export const voteComment = (commentId, value) => {
   let option = ''
   option = value === 1 ? 'upVote' : 'downVote'
 
-  return fetch(`${spi}/comments/${commentId}`,{
+  return fetch(`${api}/comments/${commentId}`,{
     method: 'POST',
     headers: {
       ...headers,
@@ -122,7 +122,7 @@ export const editPostById = (postId, formValues) => {
     body: formValues.body
   }
 
-  return fetch(`${spi}/posts/${postId}`,{
+  return fetch(`${api}/posts/${postId}`,{
     method: 'PUT',
     headers: {
       ...headers,
@@ -133,7 +133,7 @@ export const editPostById = (postId, formValues) => {
 }
 
 export const deletePostById = (postId) =>
-  fetch(`${api}/posts/${posts}`,{
+  fetch(`${api}/posts/${postId}`,{
     method:'DELETE',
     headers:headers
   }).then(res => res)

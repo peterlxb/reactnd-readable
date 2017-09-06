@@ -3,11 +3,11 @@ export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const SET_COMMENTS_TO_POST_ID = 'SET_COMMENTS_TO_POST_ID'
 export const APPLY_VOTE_TO_COMMENT = 'APPLY_VOTE_TO_COMMENT'
 
-export function addNewComment(postId,comment) {
+export function addNewComment(postId,comments) {
   return {
     type: ADD_COMMENT,
     postId,
-    comment
+    comments
   }
 }
 
@@ -33,6 +33,7 @@ export function applyVoteToComment(commentId, parentId,newValue){
   return {
     type: APPLY_VOTE_TO_COMMENT,
     commentId,
-    parentId,newValue
+    parentId,
+    newValue
   }
 }
