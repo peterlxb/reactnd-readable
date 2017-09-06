@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import FaArrowUp from 'react-icons/lib/fa/angle-up'
+import FaArrowDown from 'react-icons/lib/fa/angle-down'
 import {
   setPostsComments
 } from './../../actions'
@@ -13,9 +15,24 @@ class PostInList extends Component {
 
   render() {
     const { post ,comments} = this.props
+
+    let postComments = false
+    if (comments) {
+      if (comments[post.id])
+        postComments = comments[post.id].filter(
+          comment => comment.deleted === false
+        )
+    }
+
     return(
       <div className="post-content">
+
         <div className="content">
+          <button>
+            <FaArrowUp size={30}/>
+              {post.voteScore}
+            <FaArrowDown size={30}/>
+          </button>
           <p>
             <strong>
               {post.author}
@@ -32,6 +49,17 @@ class PostInList extends Component {
               {post.title}
             </Link>
           </p>
+        </div>
+        <div className="category">
+        <Link to={'/category/' + post.category} className="tag">
+                    {post.category}
+        </Link>
+        &nbsp;
+        {postComments && postComments.length
+            ? postComments.length === 1
+            ? '1 comment'
+            : postComments.length + ' comments'
+            : ' 0 comments'}
         </div>
       </div>
     )
