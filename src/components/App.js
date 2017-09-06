@@ -13,6 +13,8 @@ import {
 import * as ReadableAPI from './../utils/api'
 import { objectToArray } from './../utils/utils'
 import Categories from './categories/categories'
+import Category from './categories/mainCategories'
+import PostView from './post/PostView'
 import Home from './Home'
 
 class App extends Component {
@@ -37,7 +39,23 @@ class App extends Component {
               posts={posts}
               />}
           />
-
+          <Route
+            path="/category/:url"
+            render={({ match }) =>
+              <Category
+                categories={categories}
+                categoryPath={match.params.url}
+                posts={posts}
+              />
+          }/>
+          <Route
+            path="/:category/:postId"
+            render={({match}) =>
+              <PostView
+              postId={match.params.postId}
+              categoryUrl={match.params.category}
+              />
+            }/>
         </Switch>
       </div>
     )
