@@ -1,24 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import CategoryInfo from './CategoryInfo'
 
 const Categories = props =>
     <div className="container">
         <h3 className="title">Category</h3>
         <div className="container">
-          <div className="column">
-            <ul className="tabmeun">
-            {props.caregories && props.categories.map((category, index) => {
-              <li key={index} className="category-item">
-                <Link
-                  to={'/category/' + category.path}
-                  key={index}>
-                <span className="title">{category.name}</span>
-                <br />
-                </Link>
-              </li>
+        <div className="columns">
+          {console.log("get categories: ", props.categories)}
+          {console.log("get posts: ", props.posts)}
+          {props.categories !== '' &&
+            props.categories.map((category, index) => {
+              
+
+              return (
+                <CategoryInfo
+                  linkTo={'/category/' + category.path}
+                  key={index}
+                  title={category.name}
+
+                />
+              )
             })}
-            </ul>
-          </div>
+        </div>
         </div>
       </div>
 
