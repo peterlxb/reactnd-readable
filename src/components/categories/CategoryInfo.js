@@ -9,7 +9,10 @@ const CategoryInfo = (props) => (
   <p className={'notification is-centered-text ' + props.colorToApply}>
     <span className="title">{props.title}</span>
     <br />
-
+    { (props.numberOfPosts > 0 ) ?
+        ((props.numberOfPosts > 1 ) ?
+          props.numberOfPosts + ' posts' : '1 post')
+        : 'No posts yet' }
   </p>
   </Link>
 )

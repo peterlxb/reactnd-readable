@@ -11,6 +11,7 @@ import {
   setCategories,setPosts,
 } from './../actions'
 import * as ReadableAPI from './../utils/api'
+import { objectToArray } from './../utils/utils'
 import Categories from './categories/categories'
 import Home from './Home'
 
@@ -36,6 +37,7 @@ class App extends Component {
               posts={posts}
               />}
           />
+
         </Switch>
       </div>
     )
@@ -45,7 +47,7 @@ class App extends Component {
 function mapStateToProps(state, props){
   return {
     categories: state.categories,
-    posts: state.posts,
+    posts: objectToArray(state.posts).filter(post => post.deleted === false),
   }
 }
 
