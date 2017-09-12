@@ -7,6 +7,7 @@ import FaArrowDown from 'react-icons/lib/fa/angle-down'
 import {
   showDate
 } from '../../utils/utils'
+import AddComment from './../comment/AddComment'
 
 
 class Post extends Component {
@@ -65,6 +66,7 @@ class Post extends Component {
                 )}
               </div>
             }
+            <AddComment postId={post.id} />
           </div>
         </div>
       </div>}

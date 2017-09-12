@@ -3,8 +3,8 @@ import {
   UPDATE_COMMENT,
   SET_COMMENTS_TO_POST_ID,
   APPLY_VOTE_TO_COMMENT,
-  CONTROL_NEW_COMMENT ,
-  CONTROL_EDIT_COMMENT
+  CONTROL_NEW_COMMENT,
+  CONTROL_EDIT_COMMENT_FORM
 } from '../actions'
 
 
@@ -46,7 +46,7 @@ export const comments = (state={}, action) => {
 
       return {
         ...state,
-        [parentId]: state[parentId].cancat(newComment)
+        [parentId]: state[parentId].concat(newComment)
       }
 
     case UPDATE_COMMENT:
@@ -68,7 +68,7 @@ export const comments = (state={}, action) => {
 export const newCommentData = (state={}, action) => {
   switch(action.type){
     case CONTROL_NEW_COMMENT:
-      const { name, value } = this.props
+      const { name, value } = action
       return {
         ...state,
         [name]:value
@@ -78,10 +78,10 @@ export const newCommentData = (state={}, action) => {
   }
 }
 
-export const editCommentForm = (state={id: 0}, action) => {
+export const editCommentForm = (state = { id: 0 }, action) => {
   switch(action.type){
-    case CONTROL_EDIT_COMMENT:
-      const { name, value } = this.props
+    case CONTROL_EDIT_COMMENT_FORM:
+      const { name, value } = action
       return {
         ...state,
         [name]:value
