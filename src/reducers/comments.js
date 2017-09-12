@@ -2,7 +2,9 @@ import {
   ADD_COMMENT,
   UPDATE_COMMENT,
   SET_COMMENTS_TO_POST_ID,
-  APPLY_VOTE_TO_COMMENT
+  APPLY_VOTE_TO_COMMENT,
+  CONTROL_NEW_COMMENT ,
+  CONTROL_EDIT_COMMENT
 } from '../actions'
 
 
@@ -58,6 +60,32 @@ export const comments = (state={}, action) => {
         )
       }
 
+    default:
+      return state
+  }
+}
+
+export const newCommentData = (state={}, action) => {
+  switch(action.type){
+    case CONTROL_NEW_COMMENT:
+      const { name, value } = this.props
+      return {
+        ...state,
+        [name]:value
+      }
+    default:
+      return state
+  }
+}
+
+export const editCommentForm = (state={id: 0}, action) => {
+  switch(action.type){
+    case CONTROL_EDIT_COMMENT:
+      const { name, value } = this.props
+      return {
+        ...state,
+        [name]:value
+      }
     default:
       return state
   }
