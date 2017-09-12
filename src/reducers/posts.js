@@ -3,7 +3,9 @@ import {
   ADD_NEW_POST,
   EDIT_POST,
   APPLY_VOTE,
-  DELETE_POST
+  DELETE_POST,
+  CONTROL_NEW_POST_FORM,
+  CONTROL_EDIT_POST_FORM
 } from  '../actions'
 
 export const posts = (state ={}, action) => {
@@ -73,5 +75,31 @@ export const posts = (state ={}, action) => {
     default:
       return state
 
+  }
+}
+
+export const newPostForm = (state={},action) => {
+  switch (action.type) {
+    case CONTROL_NEW_POST_FORM:
+      const { name, value } = action
+      return{
+        ...state,
+        [name]:value
+      }
+    default:
+      return state
+  }
+}
+
+export const editPostForm = (state = {}, action) => {
+  switch (action.type) {
+    case CONTROL_EDIT_POST_FORM:
+      const { name, value } = action
+      return {
+        ...state,
+        [name]: value
+      }
+    default:
+      return state
   }
 }

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { SHOW_MESSAGE } from '../actions'
 import { categories } from './categories'
 import { comments } from './comments'
-import { posts }  from './posts'
+import { posts ,newPostForm,editPostForm}  from './posts'
 
 function showMessage(state='',action){
   switch(action.type){
@@ -18,5 +18,7 @@ export default combineReducers({
   categories,
   posts,
   comments,
-  showMessage
+  showMessage,
+  newPostForm,
+  editPostForm
 })

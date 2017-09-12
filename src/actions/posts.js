@@ -3,30 +3,48 @@ export const APPLY_VOTE = 'APPLY_VOTE'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const DELETE_POST = 'DELETE_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const CONTROL_NEW_POST_FORM = 'CONTROL_NEW_POST_FORM'
+export const CONTROL_EDIT_POST_FORM = 'CONTROL_EDIT_POST_FORM'
 
 export function setPosts(posts){
   return {
-    type:'SET_POSTS',
+    type:SET_POSTS,
     posts
   }
 }
 
 export function applyVote(postId,newValue){
   return{
-    type:'APPLY_VOTE',
+    type:APPLY_VOTE,
     newValue
   }
 }
 
 export function addNewPost(formValues){
   return {
-    type:'ADD_NEW_POST',
+    type:ADD_NEW_POST,
     title:formValues.title,
     category: formValues.category,
     username: formValues.username,
     message: formValues.message,
     id: formValues.id,
     timestamp: formValues.timestamp
+  }
+}
+
+export function controlNewPostForm(name, value){
+  return {
+    type:CONTROL_NEW_POST_FORM,
+    name,
+    value
+  }
+}
+
+export function controlEditPostForm(name,value){
+  return{
+    type:CONTROL_EDIT_POST_FORM,
+    name,
+    value
   }
 }
 

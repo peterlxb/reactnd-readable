@@ -16,6 +16,7 @@ import Categories from './categories/categories'
 import Category from './categories/mainCategories'
 import PostView from './post/PostView'
 import Home from './Home'
+import NewPost from './post/NewPost'
 
 class App extends Component {
 
@@ -56,6 +57,8 @@ class App extends Component {
               categoryUrl={match.params.category}
               />
             }/>
+
+            <Route exact path="/new" component={NewPost} />
         </Switch>
       </div>
     )
