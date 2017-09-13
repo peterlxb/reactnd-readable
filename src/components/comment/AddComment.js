@@ -37,7 +37,7 @@ class AddComment extends Component {
 
   render (){
     const {newCommentData, controlNewComment } = this.props
-    console.log("newComment",newCommentData)
+    
     return (
       <div>
         <h4>Add a Comment:</h4>
