@@ -4,11 +4,14 @@ import { connect } from 'react-redux'
 import FaArrowUp from 'react-icons/lib/fa/angle-up'
 import FaArrowDown from 'react-icons/lib/fa/angle-down'
 import {
-  setPostsComments
+  setPostsComments,
+  displayDeleteModal,
+  setPostIdToDeleteModal
 } from './../../actions'
 import * as ReadableAPI from './../../utils/api'
 import VoteScore from './VoteScore'
 import { objectToArray } from '../../utils/utils'
+import DeletePost from './DeletePost'
 
 class PostInList extends Component {
   componentWillMount() {
@@ -16,7 +19,11 @@ class PostInList extends Component {
   }
 
   render() {
-    const { post ,comments} = this.props
+    const { post ,
+      comments,
+      deletePostModal,
+      displayDeleteModal,
+      setPostIdToDeleteModal} = this.props
 
     let postComments = false
     if (comments) {
@@ -32,7 +39,7 @@ class PostInList extends Component {
         <div className="content">
 
           <VoteScore post={post} />
-          
+
           <p>
             <strong>
               {post.author}
@@ -61,6 +68,23 @@ class PostInList extends Component {
             : postComments.length + ' comments'
             : ' 0 comments'}
         </div>
+        <div className="column" style={{ maxWidth: '100px' }}>
+            <div
+              className="button"
+              onClick={() => {
+                setPostIdToDeleteModal(post.id)
+                displayDeleteModal(true)
+              }}
+            >
+            delete
+            </div>
+
+          
+
+          </div>
+
+
+        <DeletePost deletePostModal={deletePostModal} />
       </div>
     )
   }
@@ -68,7 +92,8 @@ class PostInList extends Component {
 
 function mapStateToProps(state,props){
   return {
-    comments: state.comments
+    comments: state.comments,
+    deletePostModal: state.deletePostModal
   }
 }
 
@@ -78,6 +103,12 @@ function mapDispatchToProps(dispatch,ownProps){
       ReadableAPI.getCommentsByPostId(ownProps.post.id).then(comments => {
         dispatch(setPostsComments(ownProps.post.id,comments))
       })
+    },
+    displayDeleteModal: bool => {
+      dispatch(displayDeleteModal(bool))
+    },
+    setPostIdToDeleteModal: postId => {
+      dispatch(setPostIdToDeleteModal(postId))
     }
   }
 }

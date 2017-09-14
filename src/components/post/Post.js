@@ -7,12 +7,23 @@ import FaArrowDown from 'react-icons/lib/fa/angle-down'
 import {
   showDate
 } from '../../utils/utils'
+import {
+  displayDeleteModal,
+  setPostIdToDeleteModal
+
+} from './../../actions'
 import AddComment from './../comment/AddComment'
 import VoteScore from './VoteScore'
+import DeletePost from './DeletePost'
 
 class Post extends Component {
   render(){
-    const { post,comments} = this.props
+    const { post,
+      comments,
+      deletePostModal,
+      displayDeleteModal,
+      setPostIdToDeleteModal
+    } = this.props
     let commentsToShow = []
 
 
@@ -67,9 +78,43 @@ class Post extends Component {
           </div>
         </div>
       </div>}
+      <div className="column" style={{ maxWidth: '100px' }}>
+          <div
+            className="button"
+            onClick={() => {
+              setPostIdToDeleteModal(post.id)
+              displayDeleteModal(true)
+            }}
+          >
+          delete
+          </div>
+
+
+
+        </div>
+
+
+      <DeletePost deletePostModal={deletePostModal} />
       </div>
     )
   }
 }
 
-export default Post
+function mapStateToProps(state,props){
+  return{
+    deletePostModal: state.deletePostModal
+  }
+}
+
+function mapDispatchToProps(dispatch,ownProps){
+  return{
+    displayDeleteModal: bool => {
+      dispatch(displayDeleteModal(bool))
+    },
+    setPostIdToDeleteModal: postId => {
+      dispatch(setPostIdToDeleteModal(postId))
+    }
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Post)

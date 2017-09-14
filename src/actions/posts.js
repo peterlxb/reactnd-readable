@@ -5,6 +5,8 @@ export const DELETE_POST = 'DELETE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const CONTROL_NEW_POST_FORM = 'CONTROL_NEW_POST_FORM'
 export const CONTROL_EDIT_POST_FORM = 'CONTROL_EDIT_POST_FORM'
+export const DISPLAY_DELETE_MODAL = 'DISPLAY_DELETE_MODAL'
+export const SET_POST_ID_TO_DELETE_MODAL = 'SET_POST_ID_TO_DELETE_MODAL'
 
 export function setPosts(posts){
   return {
@@ -48,6 +50,18 @@ export function controlEditPostForm(name,value){
     value
   }
 }
+
+export function displayDeleteModal(bool){
+  return {
+    type:DISPLAY_DELETE_MODAL,
+    active:bool
+  }
+}
+
+export const setPostIdToDeleteModal = postId => ({
+  type: SET_POST_ID_TO_DELETE_MODAL,
+  postId
+})
 
 export const deletePost = postId => ({
   type: DELETE_POST,
