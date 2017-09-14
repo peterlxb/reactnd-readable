@@ -7,6 +7,7 @@ import {
   setPostsComments
 } from './../../actions'
 import * as ReadableAPI from './../../utils/api'
+import VoteScore from './VoteScore'
 
 class PostInList extends Component {
   componentWillMount() {
@@ -28,11 +29,9 @@ class PostInList extends Component {
       <div className="post-content">
 
         <div className="content">
-          <button>
-            <FaArrowUp size={30}/>
-              {post.voteScore}
-            <FaArrowDown size={30}/>
-          </button>
+
+          <VoteScore post={post} />
+
           <p>
             <strong>
               {post.author}

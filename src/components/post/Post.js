@@ -8,7 +8,7 @@ import {
   showDate
 } from '../../utils/utils'
 import AddComment from './../comment/AddComment'
-
+import VoteScore from './VoteScore'
 
 class Post extends Component {
   render(){
@@ -28,13 +28,10 @@ class Post extends Component {
          style={{ marginBottom: '50px' }}
          >
          {console.log("posts,",post)}
+
         <div className="columns">
-          <div className="column" style={{maxWidth:'115px'}}>
-            <button>
-              <FaArrowUp size={30}/>
-              {post.voteScore}
-              <FaArrowDown size={30}/>
-            </button>
+          <div className="column" style={{ maxWidth: '115px' }}>
+               <VoteScore voteScore={post.voteScore} post={post} />
           </div>
           <div className="column">
             <h1>{post.title}</h1>

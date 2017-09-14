@@ -6,6 +6,7 @@ import * as ReadableAPI from './../../utils/api'
 import { objectToArray } from '../../utils/utils'
 import Post from './Post'
 
+
 class PostView extends Component{
   componentWillMount() {
     this.props.setPostComments(this.props.postId)
