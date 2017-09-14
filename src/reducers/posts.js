@@ -46,12 +46,11 @@ export const posts = (state ={}, action) => {
 
     case APPLY_VOTE:
       const { postId, newValue } = action
-
       return {
         ...state,
         [postId]: {
           ...state[postId],
-          newValue
+          voteScore: newValue
         }
       }
 

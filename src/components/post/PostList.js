@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostInList from './PostInList'
+import { objectToArray } from '../../utils/utils'
 
 class PostList extends Component {
   render() {
@@ -22,5 +23,7 @@ class PostList extends Component {
     )
   }
 }
+
+
 
 export default PostList

@@ -72,7 +72,7 @@ export const addNewComment = (postId,comment) => {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ body })
+    body: JSON.stringify(body)
   }).then(res => { return res })
 }
 
@@ -88,13 +88,13 @@ export const addPost = (formValues) => {
     deleted: false
   }
 
-  return fetch(`${api}/posts`,{
+  return fetch(`${api}/posts/`,{
     method:'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ body })
+    body: JSON.stringify(body)
   })
 }
 
@@ -128,7 +128,7 @@ export const editPostById = (postId, formValues) => {
       ...headers,
       'Content-Type':'application/json'
     },
-    body: JSON.stringify({ body })
+    body: JSON.stringify(body)
   })
 }
 
