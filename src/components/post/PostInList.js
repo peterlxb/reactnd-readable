@@ -8,6 +8,7 @@ import {
 } from './../../actions'
 import * as ReadableAPI from './../../utils/api'
 import VoteScore from './VoteScore'
+import { objectToArray } from '../../utils/utils'
 
 class PostInList extends Component {
   componentWillMount() {
@@ -26,12 +27,12 @@ class PostInList extends Component {
     }
 
     return(
-      <div className="post-content">
+      <div className="box">
 
         <div className="content">
 
           <VoteScore post={post} />
-
+          
           <p>
             <strong>
               {post.author}

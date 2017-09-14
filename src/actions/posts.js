@@ -16,6 +16,7 @@ export function setPosts(posts){
 export function applyVote(postId,newValue){
   return{
     type:APPLY_VOTE,
+    postId,
     newValue
   }
 }

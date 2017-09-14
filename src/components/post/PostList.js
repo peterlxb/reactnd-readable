@@ -11,7 +11,7 @@ class PostList extends Component {
         <h3 className="title"></h3>
         <div>
           {console.log(posts)}
-          {posts.length > 0 &&
+          {posts.length > 1 &&
             posts.map((post, index) =>
             <PostInList
               post={post}
@@ -24,6 +24,12 @@ class PostList extends Component {
   }
 }
 
+function mapStateToProps(state,props){
+  return{
+    posts: objectToArray(state.posts),
+    comments: state.comments[props.postId]
 
+  }
+}
 
-export default PostList
+export default connect(mapStateToProps)(PostList)

@@ -6,9 +6,10 @@ import {
   getCommentsByPostId
 } from './../../utils/api'
 import { showDate } from '../../utils/utils'
+import VoteComment from './VoteComment'
 
 class Comment extends Component {
-  
+
 
 
   fieldsAreValid() {
@@ -29,6 +30,9 @@ class Comment extends Component {
     return(
       <section className="content">
         <div className="columns">
+          <div className="column" style={{ maxWidth: '115px' }}>
+            <VoteComment voteScore={comment.voteScore} comment={comment} />
+          </div>
           <div className="column">
             {editCommentForm.id !== comment.id &&
               <div>
