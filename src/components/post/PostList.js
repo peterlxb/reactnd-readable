@@ -5,23 +5,32 @@ import { objectToArray } from '../../utils/utils'
 
 class PostList extends Component {
   render() {
-    const { posts} = this.props
+    const { posts, loadingPosts} = this.props
     return(
       <div>
 
 
 
-            <div>
-              <h3 className="title"></h3>
-              {posts.length > 1 &&
-              posts.map((post, index) =>
+
+  {loadingPosts
+    ? <div />
+    : <div>
+        <h3 className="title is-3 is-spaced">
+
+        </h3>
+        <div>
+          {posts.length > 0 &&
+            posts.map((post, index) =>
               <PostInList
-                post={post}
+
                 key={index}
+                post={post}
+                
               />
             )}
-            </div>
-          
+        </div>
+      </div>}
+
 
 
       </div>
@@ -32,7 +41,7 @@ class PostList extends Component {
 function mapStateToProps(state,props){
   return{
     posts: objectToArray(state.posts),
-
+    loadingPosts: state.postsAreLoading
   }
 }
 

@@ -13,7 +13,7 @@ class PostView extends Component{
   }
 
   render() {
-    const { posts, comments, postId,categoryUrl } = this.props
+    const { posts, comments, postId,categoryUrl ,loadingPosts} = this.props
     let post = false
     let rightCategory = false
     let isActive = true
@@ -27,6 +27,7 @@ class PostView extends Component{
         }
       }
     }
+
     return(
       <div>
         <Header />
@@ -34,7 +35,7 @@ class PostView extends Component{
           isActive ?
             <Post post={post} comments={comments} />
             : <section className="hero is-danger">
-    <div className="hero-body">
+            <div className="hero-body">
       <div className="container">
   			<div className="container">
           <div className="title">
@@ -45,7 +46,7 @@ class PostView extends Component{
       </div>
     </div>
   </section>
-          : <div></div>
+          : !loadingPosts && <div>bad option</div>
         }
 
       </div>
@@ -56,8 +57,8 @@ class PostView extends Component{
 function mapStateToProps(state,props){
   return{
     posts: objectToArray(state.posts),
-    comments: state.comments[props.postId]
-
+    comments: state.comments[props.postId],
+    loadingPosts: state.postsAreLoading
   }
 }
 

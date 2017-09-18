@@ -19,6 +19,7 @@ class Category extends Component {
     const { categories, posts,  categoryPath } = this.props
     const category = this.getCategory(categories)
     let postsToDisplay = []
+
     if (category && posts) {
       postsToDisplay = posts.filter( (post) => (post.category === category.data.name))
     }
@@ -26,10 +27,12 @@ class Category extends Component {
     return(
       <div>
         <Header />
+          {category ? (
+            <div style={{marginBottom: '50px'}}>
+              <PostList posts={postsToDisplay}/>
+            </div>
+          ) : <div>wrong post url</div>}
 
-           <div style={{marginBottom: '50px'}}>
-             <PostList posts={postsToDisplay}/>
-           </div>
       </div>
     )
   }
