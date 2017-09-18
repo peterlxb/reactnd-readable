@@ -7,7 +7,8 @@ import {
   DELETE_POST,
   SET_POST_ID_TO_DELETE_MODAL,
   CONTROL_NEW_POST_FORM,
-  CONTROL_EDIT_POST_FORM
+  CONTROL_EDIT_POST_FORM,
+  POSTS_ARE_LOADING
 } from  '../actions'
 
 export const posts = (state ={}, action) => {
@@ -119,6 +120,15 @@ export const deletePostModal = (state=false , action) => {
         ...state,
         postId
       }
+    default:
+      return state
+  }
+}
+
+export const postsAreLoading = (state = false, action) => {
+  switch (action.type) {
+    case POSTS_ARE_LOADING:
+      return action.value
     default:
       return state
   }

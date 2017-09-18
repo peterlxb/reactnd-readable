@@ -5,20 +5,25 @@ import { objectToArray } from '../../utils/utils'
 
 class PostList extends Component {
   render() {
-    const { posts } = this.props
+    const { posts} = this.props
     return(
       <div>
-        <h3 className="title"></h3>
-        <div>
-          {console.log(posts)}
-          {posts.length > 1 &&
-            posts.map((post, index) =>
-            <PostInList
-              post={post}
-              key={index}
-            />
-          )}
-        </div>
+
+
+
+            <div>
+              <h3 className="title"></h3>
+              {posts.length > 1 &&
+              posts.map((post, index) =>
+              <PostInList
+                post={post}
+                key={index}
+              />
+            )}
+            </div>
+          
+
+
       </div>
     )
   }
@@ -27,7 +32,6 @@ class PostList extends Component {
 function mapStateToProps(state,props){
   return{
     posts: objectToArray(state.posts),
-    comments: state.comments[props.postId]
 
   }
 }

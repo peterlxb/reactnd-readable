@@ -7,6 +7,7 @@ export const CONTROL_NEW_POST_FORM = 'CONTROL_NEW_POST_FORM'
 export const CONTROL_EDIT_POST_FORM = 'CONTROL_EDIT_POST_FORM'
 export const DISPLAY_DELETE_MODAL = 'DISPLAY_DELETE_MODAL'
 export const SET_POST_ID_TO_DELETE_MODAL = 'SET_POST_ID_TO_DELETE_MODAL'
+export const POSTS_ARE_LOADING = 'POSTS_ARE_LOADING'
 
 export function setPosts(posts){
   return {
@@ -72,4 +73,9 @@ export const  editPost = post => ({
   type: EDIT_POST,
   post
 
+})
+
+export const postsAreLoading = value => ({
+  type: POSTS_ARE_LOADING,
+  value
 })

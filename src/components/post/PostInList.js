@@ -78,13 +78,8 @@ class PostInList extends Component {
             >
             delete
             </div>
-
-          
-
           </div>
-
-
-        <DeletePost deletePostModal={deletePostModal} />
+          <DeletePost deletePostModal={deletePostModal} />
       </div>
     )
   }

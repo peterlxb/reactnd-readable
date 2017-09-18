@@ -15,13 +15,14 @@ class PostView extends Component{
   render() {
     const { posts, comments, postId,categoryUrl } = this.props
     let post = false
+    let rightCategory = false
     let isActive = true
 
     if (posts) {
       post = posts.find(post => post.id === postId)
       if (post) {
         if (post.category === categoryUrl) {
-
+             rightCategory = true
           if (post.deleted) isActive = false
         }
       }
@@ -29,7 +30,24 @@ class PostView extends Component{
     return(
       <div>
         <Header />
-        <Post post={post} comments={comments} />
+        {rightCategory ?
+          isActive ?
+            <Post post={post} comments={comments} />
+            : <section className="hero is-danger">
+    <div className="hero-body">
+      <div className="container">
+  			<div className="container">
+          <div className="title">
+            <i className="fa fa-exclamation-triangle"></i>
+            [Error] This post has been deleted.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+          : <div></div>
+        }
+
       </div>
     )
   }
