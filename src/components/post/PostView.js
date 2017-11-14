@@ -8,7 +8,7 @@ import Post from './Post'
 
 
 class PostView extends Component{
-  componentWillMount() {
+  componentDidMount() {
     this.props.setPostComments(this.props.postId)
   }
 
