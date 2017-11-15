@@ -1,56 +1,127 @@
 import React, { Component } from 'react'
+import Home from './Home'
+import Category from './category/Category'
+import PostView from './post/PostView'
 import { Route, Switch } from 'react-router-dom'
-
-import Header from './Header/'
-import Posts from './Posts/'
-import PostDetail from './PostDetail/'
-import NewPost from './NewPost/'
-import EditPost from './EditPost'
-import SideNav from './SideNav'
-import PlusButton from './PlusButton'
-
-import '../App.css'
+import { connect } from 'react-redux'
+import {
+  setCategories,
+  setPosts,
+  setToastMessage,
+  categoriesAreLoading,
+  postsAreLoading
+} from './../actions'
+import * as ReadableAPI from './../utils/readableAPI'
+import { withRouter } from 'react-router'
+import { objectToArray } from '../utils/utils'
+import NewPost from './post/NewPost'
+import EditPost from './post/EditPost'
+import Notifications, { notify } from 'react-notify-toast'
+import NotFound from './NotFound'
 
 class App extends Component {
-  state = {
-    hamburgerClicked: false
+  componentWillMount() {
+    this.props.getAllCategories()
+    this.props.getAllPosts()
   }
 
-  onHamburgerClick = () => {
-    this.setState({
-      hamburgerClicked: !this.state.hamburgerClicked
-    })
+  componentWillReceiveProps() {
+    const { toastMessage, setToastMessage } = this.props
+    if (toastMessage !== '') {
+      notify.show(toastMessage)
+      setToastMessage('')
+    }
   }
 
   render() {
-    let sideNavClass = ['Side-Nav', 'Side-Nav-Hide']
-    let postsClass = ['Post-Container']
-    if (this.state.hamburgerClicked) {
-      sideNavClass = ['Side-Nav', 'Side-Nav-Show']
-      postsClass = ['Post-Container-Show']
-    }
-    return(
-      <div className="App">
-        <Header
-          onHamburgerClick={this.onHamburgerClick}
-          hamburgerClicked={this.state.hamburgerClicked} />
-        <div className="Container">
-          <SideNav
-            sideNavClass={sideNavClass} />
-          <div className={postsClass.join(' ')}>
-            <Switch>
-              <Route exact path ='/' component={Posts} />
-              <Route exact path ='/new' component={NewPost} />
-              <Route exact path ='/edit/:id' component={EditPost} />
-              <Route exact path ='/:category' component={Posts} />
-              <Route exact path ='/:category/:id' component={PostDetail} />
-            </Switch>
-          </div>
-          <PlusButton />
-        </div>
+    const { history, categories, posts, loadingCategories } = this.props
+
+    return (
+      <div>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={({ match }) =>
+              <Home
+                categories={categories}
+                posts={posts}
+                history={history}
+                loadingCategories={loadingCategories}
+              />}
+          />
+
+          <Route
+            path="/category/:url"
+            render={({ match }) =>
+              <Category
+                categories={categories}
+                categoryPath={match.params.url}
+                posts={posts}
+                history={history}
+              />}
+          />
+
+          <Route
+            path="/edit/:query"
+            render={({ match }) =>
+              <EditPost postId={match.params.query} history={history} />}
+          />
+
+          <Route
+            path="/:category/:postId"
+            render={({ match }) =>
+              <PostView
+                postId={match.params.postId}
+                categoryUrl={match.params.category}
+                history={history}
+              />}
+          />
+
+          <Route
+            path="/post/:query"
+            render={({ match }) =>
+              <PostView postId={match.params.query} history={history} />}
+          />
+
+          <Route exact path="/new" component={NewPost} />
+
+          <Route path="*" component={NotFound} />
+        </Switch>
+
+        <Notifications options={{ timeout: 2200 }} />
       </div>
     )
   }
 }
 
-export default App
+function mapStateToProps(state, props) {
+  return {
+    categories: state.categories,
+    posts: objectToArray(state.posts).filter(post => post.deleted === false),
+    toastMessage: state.toastMessage,
+    loadingCategories: state.categoriesAreLoading,
+    loadingPosts: state.loadingPosts
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setToastMessage: message => dispatch(setToastMessage(message)),
+    getAllCategories: () => {
+      dispatch(categoriesAreLoading(true))
+      ReadableAPI.getAllCategories().then(categories => {
+        dispatch(setCategories(objectToArray(categories)))
+        dispatch(categoriesAreLoading(false))
+      })
+    },
+    getAllPosts: () => {
+      dispatch(postsAreLoading(true))
+      ReadableAPI.getAllPosts().then(posts => {
+        dispatch(setPosts(posts))
+        dispatch(postsAreLoading(false))
+      })
+    }
+  }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

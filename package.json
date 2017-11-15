@@ -3,25 +3,44 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animated": "^0.2.0",
     "faker": "^4.1.0",
+    "firebase": "^4.3.0",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
-    "react-bootstrap": "^0.31.5",
     "react-dom": "^15.6.1",
-    "react-icons": "^2.2.5",
-    "react-modal": "^2.3.2",
+    "react-modal": "^2.2.4",
+    "react-moment": "^0.6.1",
+    "react-notify-toast": "^0.3.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "uuid": "^3.1.0"
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged",
+    "lint": "node_modules/.bin/prettier --single-quote --no-semi --write"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "chai": "^4.1.1",
+    "chai-enzyme": "^0.8.0",
+    "enzyme": "^2.9.1",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.3",
+    "prettier": "^1.5.3"
+  },
+  "lint-staged": {
+    "*.js": [
+      "node_modules/.bin/prettier --single-quote --no-semi --write",
+      "git add"
+    ]
   }
 }

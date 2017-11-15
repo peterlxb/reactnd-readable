@@ -1,10 +1,8 @@
-import { GET_CATEGORIES } from '../actions'
+import { SET_CATEGORIES, CATEGORIES_ARE_LOADING } from '../actions'
 
-const initialState = [];
-
-const categories = (state = initialState, action) => {
+export const categories = (state = [], action) => {
   switch (action.type) {
-    case GET_CATEGORIES:
+    case SET_CATEGORIES:
       const { categories } = action
       return categories
     default:
@@ -12,4 +10,11 @@ const categories = (state = initialState, action) => {
   }
 }
 
-export default categories
+export const categoriesAreLoading = (state = false, action) => {
+  switch (action.type) {
+    case CATEGORIES_ARE_LOADING:
+      return action.value
+    default:
+      return state
+  }
+}
