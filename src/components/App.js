@@ -1,94 +1,56 @@
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom'
-import { connect } from 'react-redux'
-import * as readableApi from '../utils/api'
-import { withRouter } from 'react-router'
-import {
-  setCategories,setPosts,
-} from './../actions'
-import * as ReadableAPI from './../utils/api'
-import { objectToArray } from './../utils/utils'
-import Categories from './categories/categories'
-import Category from './categories/mainCategories'
-import PostView from './post/PostView'
-import Home from './Home'
-import NewPost from './post/NewPost'
-import PageHeader from 'react-bootstrap/lib/PageHeader'
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
+
+import Header from './Header/'
+import Posts from './Posts/'
+import PostDetail from './PostDetail/'
+import NewPost from './NewPost/'
+import EditPost from './EditPost'
+import SideNav from './SideNav'
+import PlusButton from './PlusButton'
+
+import '../App.css'
 
 class App extends Component {
+  state = {
+    hamburgerClicked: false
+  }
 
-  componentWillMount() {
-    this.props.getAllCategories()
-    this.props.getAllPosts()
+  onHamburgerClick = () => {
+    this.setState({
+      hamburgerClicked: !this.state.hamburgerClicked
+    })
   }
 
   render() {
-    const { categories, posts } = this.props
-
+    let sideNavClass = ['Side-Nav', 'Side-Nav-Hide']
+    let postsClass = ['Post-Container']
+    if (this.state.hamburgerClicked) {
+      sideNavClass = ['Side-Nav', 'Side-Nav-Show']
+      postsClass = ['Post-Container-Show']
+    }
     return(
-      <div>
-        <PageHeader>
-          Readable use Redux and React
-        </PageHeader>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={( {match} ) =>
-              <Home
-              categories={categories}
-              posts={posts}
-              />}
-          />
-          <Route
-            path="/category/:url"
-            render={({ match }) =>
-              <Category
-                categories={categories}
-                categoryPath={match.params.url}
-                posts={posts}
-              />
-          }/>
-          <Route
-            path="/:category/:postId"
-            render={({match}) =>
-              <PostView
-              postId={match.params.postId}
-              categoryUrl={match.params.category}
-              />
-            }/>
-
-            <Route exact path="/new" component={NewPost} />
-        </Switch>
+      <div className="App">
+        <Header
+          onHamburgerClick={this.onHamburgerClick}
+          hamburgerClicked={this.state.hamburgerClicked} />
+        <div className="Container">
+          <SideNav
+            sideNavClass={sideNavClass} />
+          <div className={postsClass.join(' ')}>
+            <Switch>
+              <Route exact path ='/' component={Posts} />
+              <Route exact path ='/new' component={NewPost} />
+              <Route exact path ='/edit/:id' component={EditPost} />
+              <Route exact path ='/:category' component={Posts} />
+              <Route exact path ='/:category/:id' component={PostDetail} />
+            </Switch>
+          </div>
+          <PlusButton />
+        </div>
       </div>
     )
   }
 }
 
-function mapStateToProps(state, props){
-  return {
-    categories: state.categories,
-    posts: objectToArray(state.posts).filter(post => post.deleted === false),
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return{
-    getAllCategories: () => {
-      ReadableAPI.getAllCategories().then(categories => {
-        dispatch(setCategories(categories))
-      })
-    },
-    getAllPosts: () => {
-      ReadableAPI.getAllPosts().then(posts => {
-        dispatch(setPosts(posts))
-      })
-    }
-  }
-}
-
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App))
+export default App
