@@ -1,28 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { createStore, applyMiddleware, compose } from 'redux'
-import reducer from './reducers'
-import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 import { BrowserRouter } from 'react-router-dom'
 
+// REDUX
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+import reducer from './reducers'
+import './index.css'
 
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(thunk))
-)
+import App from './components/App';
+import registerServiceWorker from './registerServiceWorker'
+
+const middleware = applyMiddleware(thunk, createLogger())
+const store = createStore(reducer, middleware)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-)
+<Provider store={store}>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+</Provider> , document.getElementById('root'))
 registerServiceWorker()
