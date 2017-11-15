@@ -1,125 +1,199 @@
+import { ALL_CATEGORIES, SORTBY_MOST_VOTES } from '../constants'
 import {
-  SET_POSTS,
-  ADD_NEW_POST,
-  EDIT_POST,
-  APPLY_VOTE,
-  DISPLAY_DELETE_MODAL,
-  DELETE_POST,
-  SET_POST_ID_TO_DELETE_MODAL,
-  CONTROL_NEW_POST_FORM,
-  CONTROL_EDIT_POST_FORM
-} from  '../actions'
+  RECEIVE_POSTS,
+  SET_ORDER_BY_POSTS,
+  RECEIVE_POST,
+  DELETED_POST,
+  VOTED_ON_POST,
+  ADDED_POST,
+  EDITED_POST,
+  RECEIVE_COMMENTS,
+  ADDED_COMMENT,
+  DELETED_COMMENT,
+  RECEIVE_COMMENT,
+  VOTED_ON_COMMENT,
+  EDITED_COMMENT,
+  SET_ORDER_BY_COMMENTS,
+  SET_WORKING_POST,
+  SET_WORKING_COMMENT,
+  RESET_WORKING_POST,
+} from '../actions'
 
-export const posts = (state ={}, action) => {
+const initialState = {
+  category: ALL_CATEGORIES.path,
+  orderBy: SORTBY_MOST_VOTES,
+  data: [],
+  currentPost: null,
+  comments: [],
+  currentComment: null,
+  commentsOrderBy: SORTBY_MOST_VOTES,
+  workingPost: {
+    category: '',
+    title: '',
+    body: '',
+    author: '',
+  },
+  isEditing: false,
+  workingComment: {
+    title: '',
+    body: '',
+    author: '',
+  },
+}
+
+export const posts = (state = initialState, action) => {
   switch(action.type){
-    case DELETE_POST:
-      const postIdToDelete = action.postId
+    case RECEIVE_POSTS:
       return {
         ...state,
-        [postIdToDelete]:{
-          ...state[postIdToDelete],
-          deleted:true
+        category: action.payload.category,
+        currentPost:null,
+        data:action.payload.posts,
+        comments:[],
+        currentComment:null,
         }
-      }
 
-    case SET_POSTS:
-      const { posts } = action
-      let stateWithPosts = []
-      posts.forEach(post => {
-        stateWithPosts = {
-          ...stateWithPosts,
-          [post.id]: post
-        }
-      })
-      return stateWithPosts
-
-    case EDIT_POST:
-      const postEdited = action.post
+    case SET_ORDER_BY_POSTS:
       return {
         ...state,
-        [postEdited.id]: {
-          ...state[postEdited.id],
-          title: postEdited.title,
-          body: postEdited.body,
-          author: postEdited.author,
-          category: postEdited.category
-        }
+        orderBy:action.orderBy,
       }
 
-    case APPLY_VOTE:
-      const { postId, newValue } = action
+    case RECEIVE_POST:
       return {
         ...state,
-        [postId]: {
-          ...state[postId],
-          voteScore: newValue
-        }
+        currentPost: action.post,
+        comments: [],
+        currentComment: null,
+        isEditing: false,
+        workingPost: {
+          category: '',
+          title: '',
+          body: '',
+          author: '',
+        },
       }
 
-    case ADD_NEW_POST:
-      const { title, username, message, category, id, timestamp } = action
-
+    case DELETED_POST:
       return {
         ...state,
-        [id]:{
-          author: username,
-          body: message,
-          category,
-          deleted:false,
-          id,
-          timestamp,
-          title,
-          voteScore:1
-        }
+        currentPost:null,
+        data: state.data.filter(post => post.id !== action.id),
+        comments:[],
+        currentComment: null,
       }
 
-    default:
-      return state
-
-  }
+      case VOTED_ON_POST:
+        return {
+          ...state,
+          data: state.data.map(
+            post => (post.id === action.post.id ? action.post : post),
+          ),
+        }
+      case ADDED_POST:
+        return {
+          ...state,
+          workingPost: {
+            category: '',
+            title: '',
+            body: '',
+            author: '',
+          },
+        }
+      case EDITED_POST:
+        return {
+          ...state,
+          workingPost: {
+            category: '',
+            title: '',
+            body: '',
+            author: '',
+          },
+          isEditing: false,
+        }
+      case RECEIVE_COMMENTS:
+        return {
+          ...state,
+          comments: action.comments,
+          currentComment: null,
+        }
+      case ADDED_COMMENT:
+        return {
+          ...state,
+          comments: [...state.comments, action.comment],
+          workingComment: {
+            title: '',
+            body: '',
+            author: '',
+          },
+        }
+      case DELETED_COMMENT:
+        return {
+          ...state,
+          comments: state.comments.filter(
+            comment => comment.id !== action.comment.id,
+          ),
+          currentComment: null,
+        }
+      case RECEIVE_COMMENT:
+        return {
+          ...state,
+          currentComment: action.comment,
+          isEditing: false,
+          workingComment: {
+            title: '',
+            body: '',
+            author: '',
+          },
+        }
+      case VOTED_ON_COMMENT:
+        return {
+          ...state,
+          comments: state.comments.map(
+            comment =>
+              comment.id === action.comment.id ? action.comment : comment,
+          ),
+        }
+      case EDITED_COMMENT:
+        return {
+          ...state,
+          isEditing: false,
+          workingComment: {
+            title: '',
+            body: '',
+            author: '',
+          },
+        }
+      case SET_ORDER_BY_COMMENTS:
+        return {
+          ...state,
+          commentsOrderBy: action.orderBy,
+        }
+      case SET_WORKING_POST:
+        return {
+          ...state,
+          workingPost: { ...state.workingPost, ...action.post },
+          isEditing: true,
+        }
+      case SET_WORKING_COMMENT:
+        return {
+          ...state,
+          workingComment: { ...state.workingComment, ...action.comment },
+          isEditing: true,
+        }
+      case RESET_WORKING_POST:
+        return {
+          ...state,
+          workingPost: {
+            category: '',
+            title: '',
+            body: '',
+            author: '',
+          },
+          isEditing: false,
+        }
+      default:
+        return state
+    }
 }
-
-export const newPostForm = (state={},action) => {
-  switch (action.type) {
-    case CONTROL_NEW_POST_FORM:
-      const { name, value } = action
-      return{
-        ...state,
-        [name]:value
-      }
-    default:
-      return state
-  }
-}
-
-export const editPostForm = (state = {}, action) => {
-  switch (action.type) {
-    case CONTROL_EDIT_POST_FORM:
-      const { name, value } = action
-      return {
-        ...state,
-        [name]: value
-      }
-    default:
-      return state
-  }
-}
-
-export const deletePostModal = (state=false , action) => {
-  switch(action.type){
-    case DISPLAY_DELETE_MODAL:
-      const { active } = action
-      return{
-        ...state,
-        isActive:active
-      }
-    case SET_POST_ID_TO_DELETE_MODAL:
-      const { postId } = action
-      return{
-        ...state,
-        postId
-      }
-    default:
-      return state
-  }
-}
+export default posts
