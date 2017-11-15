@@ -1,8 +1,8 @@
- export const SET_CATEGORIES  = 'SET_CATEGORIES'
+ export const GET_CATEGORIES  = 'GET_CATEGORIES'
 
- export function setCategories(categories){
+ export function getCategories(categories){
    return {
-     type: SET_CATEGORIES,
+     type: GET_CATEGORIES,
      categories
    }
  }
