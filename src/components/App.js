@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import LogoImg from '../images/readable-logo.png'
+import Button from 'react-bootstrap/lib/Button';
+import { connect } from 'react-redux'
 import '../App.css';
+import { fetchAllCategories } from '../actions'
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.getCategories();
+  }
+
   render() {
+
+    const {categories} = this.props
     return (
       <div className="readable-main">
-
+      {console.log(categories)}
         <div className="readable-header">
           <div className="container">
             <nav className="navbar">
@@ -14,10 +24,16 @@ class App extends Component {
                 <img src={LogoImg} width="112" height="36" alt="This a logo of redux project"/>
               </div>
               <div className="navbar-item">
-                <p className="control">
-                  <span className="icon"><i className="fa fa-plus"></i></span>
-                  &nbsp; Add new post
-                </p>
+
+
+                  <Button bsStyle="primary">
+                  <p>
+                    <span className="icon"><i className="fa fa-plus"></i></span>
+                    &nbsp; Add new post
+                  </p>
+                  </Button>
+
+
               </div>
             </nav>
           </div>
@@ -90,5 +106,16 @@ class App extends Component {
     );
   }
 }
+function mapStateToProps(categories) {
+  return {
+    categories: categories
+  }
+}
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return {
+    getCategories: () => dispatch(fetchAllCategories())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
