@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import LogoImg from '../images/readable-logo.png'
 import Button from 'react-bootstrap/lib/Button';
+import Grid from 'react-bootstrap/lib/Grid'
+import Row  from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 import { connect } from 'react-redux'
 import '../App.css';
 import { fetchAllCategories } from '../actions'
@@ -15,39 +18,39 @@ class App extends Component {
 
     const {categories} = this.props
     return (
+      <Grid>
       <div className="readable-main">
+      <Row className="show-grid">
       {console.log(categories)}
-        <div className="readable-header">
-          <div className="container">
-            <nav className="navbar">
-              <div className="navbar-brand">
-                <img src={LogoImg} width="112" height="36" alt="This a logo of redux project"/>
-              </div>
-              <div className="navbar-item">
-
-
-                  <Button bsStyle="primary">
-                  <p>
-                    <span className="icon"><i className="fa fa-plus"></i></span>
-                    &nbsp; Add new post
-                  </p>
-                  </Button>
-
-
-              </div>
-            </nav>
+        <Col xs={9} md={6}>
+          <div className="navbar-brand">
+            <img src={LogoImg} width="112" height="36" alt="This a logo of redux project"/>
           </div>
-        </div>
+        </Col>
+        <Col xs={9} md={6}>
+            <Button bsStyle="primary">
+              <p>
+              <span className="icon"><i className="fa fa-plus"></i></span>
+                &nbsp; Add new post
+              </p>
+            </Button>
+         </Col>
+        </Row>
         <hr />
-
+        <Row className="show-grid">
         <div className="reabable-category">
-          <h3>Categories</h3>
-          <ul>
-            <li>React</li>
-            <li>Redux</li>
-            <li>Udacity</li>
-          </ul>
+          <h2>Categories</h2>
+
+          {categories && categories.map((category,index) => (
+            <Col xs={6} md={4}>
+              <Button bsStyle="primary">
+                {category.name}
+              </Button>
+            </Col>
+          ))}
+
         </div>
+        </Row>
         <hr />
 
         <div className="readable-post">
@@ -103,6 +106,7 @@ class App extends Component {
         <hr />
         <div>footer</div>
       </div>
+      </Grid>
     );
   }
 }
