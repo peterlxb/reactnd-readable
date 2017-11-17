@@ -13,6 +13,11 @@ import {
   getPost,
 } from '../utils/readableAPI'
 
+ const objectToArray = obj => {
+  if (obj) return Object.keys(obj).map(key => obj[key])
+  else return []
+}
+
 class App extends Component {
 
   componentDidMount() {
@@ -61,8 +66,7 @@ class App extends Component {
         </Row>
         <hr />
 
-        {posts && Object.keys(posts).map((post) => (
-
+        {posts.length > 0 && posts[0].map((post) => (
           <div className="container content has-top-margin"
             style={{ marginBottom: '50px' }}>
             <div className="columns">
@@ -75,7 +79,7 @@ class App extends Component {
                     <div className="column" style={{ maxWidth: '115px' }}>
                       <div className="readable-voteScore-wrapper">
                         <div className={'readable-voteScore-value notification '}>
-                              {posts[post].voteScore}
+                              {post.voteScore}
                           </div>
                         <a className="button is-success is-outlined"
                           onClick={() => {}}>
@@ -99,18 +103,18 @@ class App extends Component {
                         className="fa fa-user-circle-o"
                         aria-hidden="true"
                         />{' '}
-                        {posts[post].author}
+                        {post.author}
                         </strong>
                           &nbsp; · &nbsp;
                         <small>
                         <i className="fa fa-clock-o" aria-hidden="true" />{' '}
-                        {Date(posts[post].timestamp)}
+                        {Date(post.timestamp)}
                         </small>
                         <br />
                         <a
                         className="is-size-4"
                         >
-                        {posts[post].title}
+                        {post.title}
                         </a>
                       </p>
                     </div>
@@ -118,14 +122,16 @@ class App extends Component {
                     <nav className="level is-mobile">
                     <div className="level-left">
                       <a className="tag">
-                        {posts[post].category}
+                        {post.category}
                       </a>
                       &nbsp;
                       <span className="icon is-small">
                         <i className="fa fa-comment-o" />
                       </span>
                       &nbsp;
-                      {posts[post].body}
+                      {posts[1].map(comment => (
+                        <p>{comment.author}</p>
+                      ))}
                     </div>
                   </nav>
 
@@ -133,7 +139,7 @@ class App extends Component {
 
                 </article>
               </div>
-              
+
               <div className="column" style={{ maxWidth: '100px' }}>
               <div className="button actionButtonFromPostList is-danger is-small is-outlined"
                 onClick={() => {}}>
@@ -166,16 +172,14 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     categories: state.categories,
-    posts: state.posts
+    posts: objectToArray(state.posts),
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getCategories: () => dispatch(fetchAllCategories()),
-    getPosts: () => getAllPosts().then((posts) => {
-        dispatch(fetchPosts(posts))
-      })
+    getPosts: () => dispatch(fetchPosts())
   }
 }
 
