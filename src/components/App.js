@@ -6,22 +6,30 @@ import Row  from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import { connect } from 'react-redux'
 import '../App.css';
-import { fetchAllCategories } from '../actions'
+import { fetchAllCategories } from '../actions/categories'
+import { fetchPosts } from '../actions/posts'
+import {
+  getAllPosts,
+  getPost,
+} from '../utils/readableAPI'
 
 class App extends Component {
 
   componentDidMount() {
     this.props.getCategories();
+    this.props.getPosts();
   }
+
+
 
   render() {
 
-    const {categories} = this.props
+    const {categories,posts} = this.props
     return (
       <Grid>
       <div className="readable-main">
       <Row className="show-grid">
-      {console.log(categories)}
+      {console.log(posts)}
         <Col xs={9} md={6}>
           <div className="navbar-brand">
             <img src={LogoImg} width="112" height="36" alt="This a logo of redux project"/>
@@ -42,8 +50,8 @@ class App extends Component {
           <h2>Categories</h2>
 
           {categories && categories.map((category,index) => (
-            <Col xs={6} md={4}>
-              <Button bsStyle="primary">
+            <Col xs={6} md={4} key={index}>
+              <Button bsStyle="info" bsSize="large">
                 {category.name}
               </Button>
             </Col>
@@ -52,57 +60,62 @@ class App extends Component {
         </div>
         </Row>
         <hr />
+        <Grid>
+        {posts && Object.keys(posts).map((post) => (
 
-        <div className="readable-post">
-          <div className="columns">
-            <div className="column">
-              <article className="media">
-                <div className="media-left">
-                  <figure className="has-text-centered">
-                    VoteScore
-                  </figure>
-                </div>
-                <div className="media-content">
-                  <div className="content">
-                    <p>
-                      <strong>
-                      <i
-                      className="fa fa-user-circle-o"
-                      aria-hidden="true"
-                      />{' '}
-                      Author
-                      </strong>
-                        &nbsp; · &nbsp;
-                      <small>
-                      <i className="fa fa-clock-o" aria-hidden="true" />{' '}
-                      Date
-                      </small>
-                      <br />
-                      <a
-                      className="is-size-4"
-                      >
-                      title
+          <div className="readable-post">
+            <div className="columns">
+              <div className="column">
+                <article className="media">
+                  <div className="media-left">
+                    <figure className="has-text-centered">
+                      {posts[post].voteScore}
+                    </figure>
+                  </div>
+                  <div className="media-content">
+                    <div className="content">
+                      <p>
+                        <strong>
+                        <i
+                        className="fa fa-user-circle-o"
+                        aria-hidden="true"
+                        />{' '}
+                        {posts[post].author}
+                        </strong>
+                          &nbsp; · &nbsp;
+                        <small>
+                        <i className="fa fa-clock-o" aria-hidden="true" />{' '}
+                        {Date(posts[post].timestamp)}
+                        </small>
+                        <br />
+                        <a
+                        className="is-size-4"
+                        >
+                        {posts[post].title}
+                        </a>
+                      </p>
+                    </div>
+                    <nav className="level is-mobile">
+                    <div className="level-left">
+                      <a className="tag">
+                        {posts[post].category}
                       </a>
-                    </p>
+                      &nbsp;
+                      <span className="icon is-small">
+                        <i className="fa fa-comment-o" />
+                      </span>
+                      &nbsp;
+                      {posts[post].body}
+                    </div>
+                  </nav>
                   </div>
-                  <nav className="level is-mobile">
-                  <div className="level-left">
-                    <a className="tag">
-                      category
-                    </a>
-                    &nbsp;
-                    <span className="icon is-small">
-                      <i className="fa fa-comment-o" />
-                    </span>
-                    &nbsp;
-                    comments
-                  </div>
-                </nav>
-                </div>
-              </article>
+                </article>
+              </div>
             </div>
           </div>
-        </div>
+
+        ))}
+</Grid>
         <hr />
         <div>footer</div>
       </div>
@@ -110,15 +123,19 @@ class App extends Component {
     );
   }
 }
-function mapStateToProps(categories) {
+function mapStateToProps(state) {
   return {
-    categories: categories
+    categories: state.categories,
+    posts: state.posts
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCategories: () => dispatch(fetchAllCategories())
+    getCategories: () => dispatch(fetchAllCategories()),
+    getPosts: () => getAllPosts().then((posts) => {
+        dispatch(fetchPosts(posts))
+      })
   }
 }
 

@@ -1,16 +1,8 @@
-import {
-  GET_CATEGORIES
-} from '../actions'
+import { combineReducers } from 'redux'
+import {categories} from './categories'
+import {posts} from './posts'
 
-const initialCategoryState = [];
-
-const categories = (state=initialCategoryState,action) => {
-  switch(action.type){
-    case GET_CATEGORIES:
-      return action.categories
-    default:
-      return state
-  }
-}
-
-export default categories
+export default combineReducers({
+  categories,
+  posts,
+})
