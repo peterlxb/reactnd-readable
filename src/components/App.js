@@ -26,10 +26,10 @@ class App extends Component {
 
     const {categories,posts} = this.props
     return (
-      <Grid>
-      <div className="readable-main">
-      <Row className="show-grid">
-      {console.log(posts)}
+
+      <div className="container">
+        <Row className="show-grid">
+        {console.log(posts)}
         <Col xs={9} md={6}>
           <div className="navbar-brand">
             <img src={LogoImg} width="112" height="36" alt="This a logo of redux project"/>
@@ -60,19 +60,38 @@ class App extends Component {
         </div>
         </Row>
         <hr />
-        <Grid>
+
         {posts && Object.keys(posts).map((post) => (
 
-          <div className="readable-post">
+          <div className="container content has-top-margin"
+            style={{ marginBottom: '50px' }}>
             <div className="columns">
+
               <div className="column">
                 <article className="media">
+
                   <div className="media-left">
                     <figure className="has-text-centered">
-                      {posts[post].voteScore}
-                    </figure>
-                  </div>
+                    <div className="column" style={{ maxWidth: '115px' }}>
+                      <div className="readable-voteScore-wrapper">
+                        <div className={'readable-voteScore-value notification '}>
+                              {posts[post].voteScore}
+                          </div>
+                        <a className="button is-success is-outlined"
+                          onClick={() => {}}>
+                          <i className="fa fa-thumbs-o-up" aria-hidden="true" />
+                        </a>
+                        <a className="button is-danger is-outlined"
+                          onClick={() => {}}>
+                          <i className="fa fa-thumbs-o-down" aria-hidden="true" />
+                        </a>
+                      </div>
+                     </div>
+                     </figure>
+                   </div>
+
                   <div className="media-content">
+
                     <div className="content">
                       <p>
                         <strong>
@@ -95,6 +114,7 @@ class App extends Component {
                         </a>
                       </p>
                     </div>
+
                     <nav className="level is-mobile">
                     <div className="level-left">
                       <a className="tag">
@@ -108,18 +128,38 @@ class App extends Component {
                       {posts[post].body}
                     </div>
                   </nav>
+
                   </div>
+
                 </article>
               </div>
+              
+              <div className="column" style={{ maxWidth: '100px' }}>
+              <div className="button actionButtonFromPostList is-danger is-small is-outlined"
+                onClick={() => {}}>
+                <span className="icon is-small">
+                  <i className="fa fa-trash-o" />
+                </span>
+                  &nbsp; delete
+              </div>
+              <br />
+              <a className="button actionButtonFromPostList is-small is-info is-outlined">
+                <span className="icon is-small">
+                  <i className="fa fa-edit" />
+                </span>
+                &nbsp; edit
+              </a>
+              </div>
+
             </div>
           </div>
 
         ))}
-</Grid>
+
         <hr />
-        <div>footer</div>
+        <div className="container">footer</div>
       </div>
-      </Grid>
+
     );
   }
 }
