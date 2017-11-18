@@ -12,6 +12,7 @@ import {
   getAllPosts,
   getPost,
 } from '../utils/readableAPI'
+import Categories from './Categories'
 
  const objectToArray = obj => {
   if (obj) return Object.keys(obj).map(key => obj[key])
@@ -53,17 +54,11 @@ class App extends Component {
         <Row className="show-grid">
         <div className="reabable-category">
           <h2>Categories</h2>
-
-          {categories && categories.map((category,index) => (
-            <Col xs={6} md={4} key={index}>
-              <Button bsStyle="info" bsSize="large">
-                {category.name}
-              </Button>
-            </Col>
-          ))}
+          <Categories categories={categories}/>
 
         </div>
         </Row>
+
         <hr />
 
         {posts.length > 0 && posts[0].map((post) => (
