@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Grid from 'react-bootstrap/lib/Grid'
 import Row  from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
+import { Link ,Switch,Route} from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../App.css';
 import { fetchAllCategories } from '../actions/categories'
@@ -13,6 +14,7 @@ import {
   getPost,
 } from '../utils/readableAPI'
 import Categories from './Categories'
+import AddPost from './AddPost'
 
  const objectToArray = obj => {
   if (obj) return Object.keys(obj).map(key => obj[key])
@@ -42,12 +44,11 @@ class App extends Component {
           </div>
         </Col>
         <Col xs={9} md={6}>
-            <Button bsStyle="primary">
-              <p>
+            <Link className="button is-primary" to='/new'>
               <span className="icon"><i className="fa fa-plus"></i></span>
                 &nbsp; Add new post
-              </p>
-            </Button>
+            </Link>
+
          </Col>
         </Row>
         <hr />
@@ -158,6 +159,11 @@ class App extends Component {
         ))}
 
         <hr />
+        <Switch>
+
+          <Route exact path ='/new' component={AddPost} />
+
+        </Switch>
         <div className="container">footer</div>
       </div>
 

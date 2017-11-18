@@ -7,10 +7,10 @@ import Col from 'react-bootstrap/lib/Col'
 class Categories extends Component {
 
     render(){
-
+      const { categories } = this.props
       return(
         <div>
-        {this.props.categories && this.props.categories.map((category,index) => (
+        {categories && categories.map((category,index) => (
           <Col xs={6} md={4} key={index}>
             <Button bsStyle="info" bsSize="large">
               {category.name}
