@@ -17,7 +17,7 @@ function getPosts(posts,comments){
   }
 }
 
-function addNewPostAction(post){
+function addNewPostAction(post) {
   return{
     type:ADD_NEW_POST,
     post

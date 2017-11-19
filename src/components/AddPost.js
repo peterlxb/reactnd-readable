@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LogoImg from '../images/readable-logo.png'
+import uuidv1 from 'uuid/v1'
+import { addPost } from '../actions/posts'
 
 class AddPost extends Component {
 
@@ -11,6 +14,63 @@ class AddPost extends Component {
     body: '',
     notValid: false,
     success: false
+  }
+
+  handleSubmit = (event) => {
+
+    const { title, category, author, body } = this.state
+
+    if (title && category && author && body) {
+      const newPost = {
+        id: uuidv1(),
+        timestamp: Date.now(),
+        title,
+        category,
+        author,
+        body
+      }
+
+      this.props.addNewPost(newPost)
+        .then(() => this.setState({
+          success: true,
+          title: '',
+          category: '',
+          author: '',
+          body: '',
+          notValid: false
+        }))
+    } else {
+      this.setState({
+        notValid: true,
+        success: false
+      })
+    }
+  }
+
+  onTitleChange = (e) => {
+    this.setState({
+      title:e.target.value
+    })
+  }
+
+  onUsernameChange = (e) => {
+    this.setState({
+      author:e.target.value
+    })
+  }
+
+  onCategoryChange = (e) => {
+    this.setState({
+      category: e.target.value
+    })
+
+  }
+
+  onBodyChange = (e) => {
+    this.setState({
+      body: e.target.value
+    })
+
   }
 
   render(){
@@ -39,12 +99,22 @@ class AddPost extends Component {
 
                 </div>
               </div>
+
               <hr />
               <div className="container has-top-margin has-bottom-margin">
                 <div className="columns">
                   <div className="column is-half">
+                  <div>
+                    {this.state.success && (
+                      <h3>New Post added...</h3>
+                    )}
+                  </div>
+                  <div>
+                    {this.state.notValid && (
+                      <h3>Please enter all values...</h3>
+                    )}
+                  </div>
                     <form>
-
                         <div className="title">
                           Add a new Post
                         </div>
@@ -56,15 +126,11 @@ class AddPost extends Component {
                               className="input"
                               type="text"
                               placeholder="Text input"
-                              onChange={() => {}}
+                              onChange={(event) => this.onTitleChange(event)}
+                              value={this.state.title}
                               />
                           </div>
                         </div>
-                    </form>
-
-                  </div>
-                </div>
-
 
                 <div className="field">
                   <label className="label">Username</label>
@@ -73,7 +139,8 @@ class AddPost extends Component {
                       className="input"
                       type="text"
                       placeholder="Input Username"
-                      onChange={() => {}}
+                      onChange={(event) => this.onUsernameChange(event)}
+                      value={this.state.author}
                     />
                     <span className="icon is-small is-left">
                       <i className="fa fa-user"></i>
@@ -87,7 +154,9 @@ class AddPost extends Component {
                   <label className="label">Category</label>
                   <div className="control">
                     <div className="select">
-                      <select name="category" onChange={() => {}}>
+                      <select name="category"
+                        onChange={() => this.onCategoryChange}
+                        value={this.state.category}>
                         <option value="0">Select category</option>
                         { categories && categories.map((category, index) =>
                                   <option
@@ -108,29 +177,41 @@ class AddPost extends Component {
                       name="textarea"
                       className="textarea"
                       placeholder="Textarea"
-                      onChange={() => {}}>
+                      onChange={(event) => this.onBodyChange(event)}
+                      value={this.state.body}>
                     </textarea>
                   </div>
                 </div>
 
                 <div className="field is-grouped">
+
                   <div className="control">
-                    <button type="submit" className="button is-link">
+                    <button type="submit" className="button is-link" onClick={this.handleSubmit.bind(this)} >
                       <span className="icon"><i className="fa fa-paper-plane"></i></span>
                             &nbsp; &nbsp;
                             Submit
                     </button>
                   </div>
+
                   <div className="control">
-                    <button className="button is-text">Cancel</button>
+                    <a onClick={() => window.history.back()} className="button is-link">Cancel</a>
                   </div>
+
                 </div>
+
+                </form>
               </div>
             </div>
-
-
+          </div>
+          </div>
     )
   }
 }
 
-export default AddPost
+function mapDispatchToProps(dispatch) {
+  return {
+    addNewPost: (post) => dispatch(addPost(post))
+  }
+}
+
+export default connect(mapDispatchToProps)(AddPost)
