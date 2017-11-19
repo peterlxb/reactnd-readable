@@ -11,6 +11,7 @@ import {
 } from '../utils/readableAPI'
 import Home from './Home'
 import AddPost from './AddPost'
+import CategoriesInfo from './CategoriesInfo'
 
  const objectToArray = obj => {
   if (obj) return Object.keys(obj).map(key => obj[key])
@@ -24,11 +25,10 @@ class App extends Component {
     this.props.getPosts();
   }
 
-
-
-  render() {
+render() {
 
     const {categories,posts} = this.props
+
     return (
       <div>
         <Switch>
@@ -40,13 +40,23 @@ class App extends Component {
                 categories={categories}
                 posts={posts}
               />}
-            />
-
-              <Route
-                path ="/new"
-                render={() =>
-                  <AddPost />}
-                />
+             />
+            <Route
+              path ="/new"
+              render={() =>
+              <AddPost
+                categories={categories}
+              />}
+              />
+            <Route
+              path="/category/:url"
+              render={({match}) =>
+                <CategoriesInfo
+                  categories={categories}
+                  categoryPath={match.params.url}
+                  posts={posts}
+                />}
+              />
         </Switch>
       </div>
     );
