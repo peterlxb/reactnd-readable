@@ -13,10 +13,10 @@ class AddPost extends Component {
     author: '',
     body: '',
     notValid: false,
-    success: false
+    success: false,
   }
 
-  handleSubmit = (event) => {
+  handleSubmit() {
 
     const { title, category, author, body } = this.state
 
@@ -29,8 +29,8 @@ class AddPost extends Component {
         author,
         body
       }
-
-      this.props.addNewPost(newPost)
+      {console.log(this.props.addPosts)}
+      this.props.addPosts(newPost)
         .then(() => this.setState({
           success: true,
           title: '',
@@ -63,14 +63,12 @@ class AddPost extends Component {
     this.setState({
       category: e.target.value
     })
-
   }
 
   onBodyChange = (e) => {
     this.setState({
       body: e.target.value
     })
-
   }
 
   render(){
@@ -114,7 +112,7 @@ class AddPost extends Component {
                       <h3>Please enter all values...</h3>
                     )}
                   </div>
-                    <form>
+                    <div>
                         <div className="title">
                           Add a new Post
                         </div>
@@ -155,13 +153,13 @@ class AddPost extends Component {
                   <div className="control">
                     <div className="select">
                       <select name="category"
-                        onChange={() => this.onCategoryChange}
+                        onChange={(e) => this.onCategoryChange(e)}
                         value={this.state.category}>
-                        <option value="0">Select category</option>
+
                         { categories && categories.map((category, index) =>
                                   <option
                                     key={index}
-                                    value={category.path}>
+                                    value={category.name}>
                                       {category.name}
                                   </option>
                         )}
@@ -186,11 +184,14 @@ class AddPost extends Component {
                 <div className="field is-grouped">
 
                   <div className="control">
-                    <button type="submit" className="button is-link" onClick={this.handleSubmit.bind(this)} >
-                      <span className="icon"><i className="fa fa-paper-plane"></i></span>
-                            &nbsp; &nbsp;
-                            Submit
-                    </button>
+
+                    <input
+                      className="Post-Button"
+                      type="button"
+                      value="Post"
+                      onClick={this.handleSubmit.bind(this)}
+                       />
+
                   </div>
 
                   <div className="control">
@@ -199,7 +200,7 @@ class AddPost extends Component {
 
                 </div>
 
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -208,10 +209,16 @@ class AddPost extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
   return {
-    addNewPost: (post) => dispatch(addPost(post))
+    categories: state.categories
   }
 }
 
-export default connect(mapDispatchToProps)(AddPost)
+function mapDispatchToProps(dispatch) {
+  return {
+    addPosts: (post) => dispatch(addPost(post))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddPost)
