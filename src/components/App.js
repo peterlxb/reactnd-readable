@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import { Link ,Switch,Route} from 'react-router-dom'
+import { Switch,Route} from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../App.css';
 import { fetchAllCategories } from '../actions/categories'
@@ -10,6 +10,7 @@ import {
   getPost,
 } from '../utils/readableAPI'
 import Home from './Home'
+import AddPost from './AddPost'
 
  const objectToArray = obj => {
   if (obj) return Object.keys(obj).map(key => obj[key])
@@ -29,16 +30,25 @@ class App extends Component {
 
     const {categories,posts} = this.props
     return (
-      <Switch>
-        <Route
-          exact
-          path ='/'
-          render={() =>
-            (<Home
-              categories={categories}
-              posts={posts}
-            />)}/>
-      </Switch>
+      <div>
+        <Switch>
+          <Route
+            exact
+            path ="/"
+            render={() =>
+              <Home
+                categories={categories}
+                posts={posts}
+              />}
+            />
+
+              <Route
+                path ="/new"
+                render={() =>
+                  <AddPost />}
+                />
+        </Switch>
+      </div>
     );
   }
 }
@@ -56,4 +66,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));

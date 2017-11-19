@@ -36,16 +36,7 @@ div.readable-voteScore-wrapper a.button.is-success.is-outlined {
   margin-right: 2px;
 }
 
-.navbar{
-  display: flex;
-  justify-content: space-around;
-  margin-top:10px;
-  margin-bottom: 10px;
-}
-.navbar-item{
-  border:1px solid lightgrey;
-  background-color: blue;
-}
+
  ul > li  {
   list-style: none;
   display: inline-block;

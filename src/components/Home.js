@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch,Link } from 'react-router-dom'
 import LogoImg from '../images/readable-logo.png'
-import Button from 'react-bootstrap/lib/Button';
-import Grid from 'react-bootstrap/lib/Grid'
-import Row  from 'react-bootstrap/lib/Row'
-import Col from 'react-bootstrap/lib/Col'
 import Categories from './Categories'
 import AddPost from './AddPost'
 import Posts from './posts'
@@ -15,32 +11,31 @@ class Home extends Component{
     const {categories,posts} = this.props
     return(
       <div className="container">
-        <Row className="show-grid">
-          <Col xs={9} md={6}>
-            <div className="navbar-brand">
-              <img src={LogoImg} width="112" height="36" alt="This a logo of redux project"/>
+          <div className="navbar-brand">
+              <Link className="navbar-item" to="/">
+                <img src={LogoImg} width="112" height="26" alt="This a logo of redux project"/>
+              </Link>
+          </div>
+          <div className="navbar-end">
+            <div className="navbar-item">
+                <div className="field is-grouped">
+                  <p className="control">
+                    <Link className="button is-info" to='/new'>
+                      <span className="icon"><i className="fa fa-plus"></i></span>
+                        &nbsp; Add new post
+                    </Link>
+                  </p>
+                </div>
+              </div>
             </div>
-          </Col>
-          <Col xs={9} md={6}>
-            <Link className="button is-primary" to='/new'>
-              <span className="icon"><i className="fa fa-plus"></i></span>
-                &nbsp; Add new post
-            </Link>
-          </Col>
-        </Row>
-        <hr />
-        <Row className="show-grid">
-          <div className="reabable-category">
-            <h2>Categories</h2>
+            <hr />
+
+          <div className="container">
+            <h2 className="title is-3 is-spaced">Categories</h2>
             <Categories categories={categories} />
           </div>
-        </Row>
-        <hr />
-        <Row className="show-grid">
+          <hr />
           <Posts posts={posts}/>
-        </Row>
-        <hr />
-
       </div>
     )
   }
