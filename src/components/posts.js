@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import Grid from 'react-bootstrap/lib/Grid'
-import Row  from 'react-bootstrap/lib/Row'
-import Col from 'react-bootstrap/lib/Col'
 import { connect } from 'react-redux'
+import { deletePosts } from '../actions/posts'
+
+const objectToArray = obj => {
+ if (obj) return Object.keys(obj).map(key => obj[key])
+ else return []
+}
+
 
 class Posts extends Component {
+
+  onDeleteClick = (id) => {
+    this.props.deletePost(id)
+  }
+
   render() {
     const {posts} = this.props
     return(
       <div className="readable-posts">
+      {console.log(posts)}
       {posts.length > 0 && posts[0].map((post) => (
         <div className="container content has-top-margin"
           style={{ marginBottom: '50px' }}>
@@ -72,9 +82,7 @@ class Posts extends Component {
                       <i className="fa fa-comment-o" />
                     </span>
                     &nbsp;
-                    {posts[1].map(comment => (
-                      <p>{comment.author}</p>
-                    ))}
+                    
                   </div>
                 </nav>
 
@@ -85,7 +93,7 @@ class Posts extends Component {
 
             <div className="column" style={{ maxWidth: '100px' }}>
             <div className="button actionButtonFromPostList is-danger is-small is-outlined"
-              onClick={() => {}}>
+              onClick={() => this.onDeleteClick(post.id)}>
               <span className="icon is-small">
                 <i className="fa fa-trash-o" />
               </span>
@@ -110,4 +118,16 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+function mapStateToProps(state){
+  return {
+    posts: objectToArray(state.posts)
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    deletePost: (id) => dispatch(deletePosts(id))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Posts)

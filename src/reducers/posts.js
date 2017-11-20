@@ -1,7 +1,8 @@
 
 import {
   GET_ALL_POSTS,
-  ADD_NEW_POST
+  ADD_NEW_POST,
+  DELETE_POST
 } from '../actions/posts'
 
 const initialPostState = {};
@@ -18,6 +19,12 @@ export const posts = (state=initialPostState,action) => {
       return {
         ...state,
         posts: [...state.posts, action.post]
+      }
+    case DELETE_POST:
+      const currentPost = [...state.posts]
+      const Post = currentPost.filter(post => post.id !== action.id)
+      return {
+        posts: Post
       }
     default:
       return state

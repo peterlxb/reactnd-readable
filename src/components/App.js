@@ -45,7 +45,7 @@ render() {
               path ="/new"
               render={() =>
               <AddPost
-                
+
               />}
               />
             <Route

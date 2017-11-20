@@ -35,7 +35,7 @@ class Home extends Component{
             <Categories categories={categories} />
           </div>
           <hr />
-          <Posts posts={posts}/>
+          <Posts />
       </div>
     )
   }

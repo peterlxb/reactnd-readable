@@ -3,11 +3,13 @@ import {
   getPost,
   getComments,
   addNewPost,
+  deletePost,
 } from '../utils/readableAPI'
 
 export const GET_ALL_POSTS = "GET_ALL_POSTS"
 export const GET_POST = "GET_POST"
 export const ADD_NEW_POST = 'ADD_NEW_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 function getPosts(posts,comments){
   return {
@@ -21,6 +23,13 @@ function addNewPostAction(post) {
   return{
     type:ADD_NEW_POST,
     post
+  }
+}
+
+function deletePostAction(id){
+  return{
+    type:DELETE_POST,
+    id
   }
 }
 
@@ -42,3 +51,10 @@ export const addPost = (post) => dispatch => (
       dispatch(addNewPostAction(post))
     })
 )
+
+export const deletePosts = (id) => dispatch => {
+  deletePost(id)
+    .then(() => {
+      dispatch(deletePostAction(id))
+    })
+}
