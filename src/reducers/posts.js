@@ -13,7 +13,7 @@ import {
 
 
 export const posts = (state={},action) => {
-  switch(action.type){
+  switch(action.type) {
     case GET_ALL_POSTS:
       return{
         posts:action.posts
