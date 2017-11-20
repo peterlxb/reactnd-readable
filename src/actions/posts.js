@@ -66,14 +66,14 @@ export const fetchPost = (id) => dispatch => (
           })
         })
     })
-)
+  )
 
 export const addPost = (post) => dispatch => (
   addNewPost(post)
     .then(post => {
       dispatch(addNewPostAction(post))
     })
-)
+  )
 
 export const editPostAction = (id,post) => dispatch => (
   editPost(id,post)
@@ -84,7 +84,7 @@ export const editPostAction = (id,post) => dispatch => (
         post
       })
     })
-)
+  )
 
 export const deletePosts = (id) => dispatch => {
   deletePost(id)
@@ -101,7 +101,7 @@ export const removePostAction = (id) => dispatch =>(
         id
       })
     })
-)
+  )
 
 export const getAllPostsCategoryAction = (category) => dispatch => (
   getAllPostsForCategory(category)
@@ -111,7 +111,7 @@ export const getAllPostsCategoryAction = (category) => dispatch => (
         posts
       })
     })
-)
+  )
 
 export const downVoteAction = (id) => dispatch => (
   votePost(id,'downVote')
@@ -121,7 +121,7 @@ export const downVoteAction = (id) => dispatch => (
         id
       })
     })
-)
+  )
 
 export const upVoteAction = (id) => dispatch => (
   votePost(id,'upVote')
@@ -131,4 +131,4 @@ export const upVoteAction = (id) => dispatch => (
         id
       })
     })
-)
+  )
