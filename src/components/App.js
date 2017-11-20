@@ -38,7 +38,7 @@ render() {
             render={() =>
               <Home
                 categories={categories}
-                posts={posts}
+
               />}
              />
             <Route
@@ -65,7 +65,7 @@ render() {
 function mapStateToProps(state) {
   return {
     categories: state.categories,
-    posts: objectToArray(state.posts),
+    posts: state.posts,
   }
 }
 

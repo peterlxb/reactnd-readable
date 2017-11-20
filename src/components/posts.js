@@ -82,7 +82,7 @@ class Posts extends Component {
                       <i className="fa fa-comment-o" />
                     </span>
                     &nbsp;
-                    
+
                   </div>
                 </nav>
 
@@ -120,7 +120,7 @@ class Posts extends Component {
 
 function mapStateToProps(state){
   return {
-    posts: objectToArray(state.posts)
+    posts:objectToArray(state.posts) 
   }
 }
 
