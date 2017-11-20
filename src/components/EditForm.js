@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { fetchPost,editPostAction } from '../actions/posts'
 
 const objectToArray = obj => {
@@ -22,7 +23,17 @@ class EditPost extends Component {
 
   componentWillMount() {
     const { id } = this.props.match.params
-
+    this.props.getPost(id)
+      .then(() => {
+        const { title, author, body, category, voteScore } = this.props.post
+        this.setState({
+          id,
+          title,
+          author,
+          body,
+          category
+        })
+      })
   }
 
   onTitleChange = (e) => {
@@ -71,6 +82,11 @@ class EditPost extends Component {
 
     return(
       <div className="container has-top-margin has-bottom-margin">
+      {this.state.success && (
+        <Redirect
+          from={`/edit/${id}`}
+          to={`/`}  />
+      )}
         <div className="title">
           Edit this post: <i></i>
         </div>
@@ -153,7 +169,7 @@ class EditPost extends Component {
                     className="Post-Button"
                     type="button"
                     value="Edit"
-                    onClick={this.onEditClick}
+                    onClick={this.onEditClick.bind(this)}
                      />
                 </div>
                 <div className="control">
