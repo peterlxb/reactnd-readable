@@ -12,6 +12,7 @@ import {
 import Home from './Home'
 import AddPost from './AddPost'
 import CategoriesInfo from './CategoriesInfo'
+import EditPost from './EditForm'
 
  const objectToArray = obj => {
   if (obj) return Object.keys(obj).map(key => obj[key])
@@ -47,6 +48,10 @@ render() {
               <AddPost
 
               />}
+              />
+              <Route
+                path="/edit/:id"
+                component={EditPost}
               />
             <Route
               path="/category/:url"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {Link }from 'react-router-dom'
 import { deletePosts } from '../actions/posts'
 
 const objectToArray = obj => {
@@ -100,12 +101,13 @@ class Posts extends Component {
                 &nbsp; delete
             </div>
             <br />
-            <a className="button actionButtonFromPostList is-small is-info is-outlined">
+            <Link to={'/edit/' + post.id}
+              className="button actionButtonFromPostList is-small is-info is-outlined">
               <span className="icon is-small">
                 <i className="fa fa-edit" />
               </span>
               &nbsp; edit
-            </a>
+            </Link>
             </div>
 
           </div>
@@ -120,7 +122,7 @@ class Posts extends Component {
 
 function mapStateToProps(state){
   return {
-    posts:objectToArray(state.posts) 
+    posts:objectToArray(state.posts)
   }
 }
 

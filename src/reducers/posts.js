@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 
 import {
   GET_ALL_POSTS,
@@ -6,6 +7,7 @@ import {
   DELETE_POSTS,
   GET_POST_CATEGORY,
   EDIT_POST,
+  GET_POST,
 } from '../actions/posts'
 
 const initialPostState = {};
