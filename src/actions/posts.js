@@ -47,7 +47,7 @@ export const fetchPosts = () => dispatch => (
     .then((posts) => {
       posts.map(post => {
         getComments(post.id)
-          .then(comments =>{
+          .then(comments => {
             dispatch(getPosts(posts,comments))
           })
       })

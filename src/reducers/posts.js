@@ -10,13 +10,13 @@ import {
   GET_POST,
 } from '../actions/posts'
 
-const initialPostState = {};
 
-export const posts = (state=initialPostState,action) => {
+
+export const posts = (state={},action) => {
   switch(action.type){
     case GET_ALL_POSTS:
-      return {
-        posts: action.posts
+      return{
+        posts:action.posts
       }
     case ADD_NEW_POST:
       return {

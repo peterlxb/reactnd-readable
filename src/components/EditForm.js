@@ -77,7 +77,7 @@ class EditPost extends Component {
 
   render() {
 
-    const { categories } = this.props
+    const { categories,posts } = this.props
     const {id,category} = this.state
 
     return(
