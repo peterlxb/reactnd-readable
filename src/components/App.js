@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import '../App.css';
 import { fetchAllCategories } from '../actions/categories'
 import { fetchPosts } from '../actions/posts'
+import { fetchComments } from '../actions/comments'
 import {
   getAllPosts,
   getPost,
@@ -24,6 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.props.getCategories();
     this.props.getPosts();
+
   }
 
 render() {
@@ -39,7 +41,7 @@ render() {
             render={() =>
               <Home
                 categories={categories}
-
+                posts={posts}
               />}
              />
             <Route
@@ -70,14 +72,16 @@ render() {
 function mapStateToProps(state) {
   return {
     categories: state.categories,
-    posts: state.posts,
+    posts: objectToArray(state.posts),
+
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getCategories: () => dispatch(fetchAllCategories()),
-    getPosts: () => dispatch(fetchPosts())
+    getPosts: () => dispatch(fetchPosts()),
+
   }
 }
 

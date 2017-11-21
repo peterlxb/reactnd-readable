@@ -122,7 +122,7 @@ class Posts extends Component {
 
 function mapStateToProps(state){
   return {
-    posts:objectToArray(state.posts)
+    categories:state.categories
   }
 }
 

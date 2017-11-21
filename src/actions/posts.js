@@ -20,11 +20,11 @@ export const EDIT_POST = 'EDIT_POST'
 export const DOWN_VOTE = 'DOWN_VOTE'
 export const UP_VOTE = 'UP_VOTE'
 
-function getPosts(posts,comments){
+function getPosts(post,comments){
   return {
     type: GET_ALL_POSTS,
-    posts,
-    comments,
+    post,
+    comments
   }
 }
 
@@ -44,15 +44,22 @@ function deletePostAction(id){
 
 export const fetchPosts = () => dispatch => (
   getAllPosts()
-    .then((posts) => {
+    .then(posts => {
       posts.map(post => {
         getComments(post.id)
           .then(comments => {
-            dispatch(getPosts(posts,comments))
+            dispatch(getPosts(post,comments))
           })
       })
     }
 ))
+
+// export const fetchPosts = () => dispatch => (
+//   getAllPosts()
+//     .then((posts) => {
+//       dispatch(getPosts(posts))
+//     })
+// )
 
 export const fetchPost = (id) => dispatch => (
   getPost(id)
