@@ -8,16 +8,28 @@ import {Link} from 'react-router-dom'
 class Categories extends Component {
 
     render(){
-      const { categories } = this.props
+      const { categories ,posts} = this.props
+      const allPosts = posts[0];
       return(
-        <div>
-        {categories && categories.map((category,index) => (
-          <Col xs={6} md={4} key={index}>
-            <Button bsStyle="info" bsSize="large">
-              {category.name}
-            </Button>
-          </Col>
-        ))}
+        <div className="columns">
+        { console.log(allPosts)}
+        {categories && categories.map((category,index) => {
+          let numberOfPosts = allPosts.filter(post => post.category === category.name).length;
+
+          return (
+            <Link to={"/category/"+category.name} className="column">
+              <p className={'notification is-centered-text'}>
+                {category.name}
+              </p>
+              <br />
+              {
+                (numberOfPosts > 0) ?
+                ((numberOfPosts > 1) ? numberOfPosts + "posts" : "1 posts")
+                : "no post yet"
+              }
+            </Link>
+          )
+        })}
         </div>
       )
     }

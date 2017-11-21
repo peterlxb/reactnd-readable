@@ -32,7 +32,7 @@ class Home extends Component{
 
           <div className="container">
             <h2 className="title is-3 is-spaced">Categories</h2>
-            <Categories categories={categories} />
+            <Categories categories={categories} posts={posts}/>
           </div>
           <hr />
           <Posts posts={posts}/>
