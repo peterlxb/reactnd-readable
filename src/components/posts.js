@@ -81,9 +81,10 @@ class Posts extends Component {
                     &nbsp;
                     <span className="icon is-small">
                       <i className="fa fa-comment-o" />
+
                     </span>
                     &nbsp;
-
+                    {post.comments.length } comments
                   </div>
                 </nav>
 

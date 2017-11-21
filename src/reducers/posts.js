@@ -17,7 +17,6 @@ export const posts = (state={posts:[]},action) => {
     case GET_ALL_POSTS:
       action.post.comments = action.comments
       return{
-
         posts:[...state.posts, action.post],
       }
     case ADD_NEW_POST:
