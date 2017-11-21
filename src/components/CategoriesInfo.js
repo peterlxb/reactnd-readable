@@ -19,10 +19,11 @@ class CategoriesInfo extends Component {
   render() {
     const { categories, posts, categoryPath } = this.props
     const category = this.getCategory(categories)
+    const allPosts = posts[0];
 
     let postOfTheCategory = []
     if(category && posts) {
-      postOfTheCategory = posts.filter((post) => (post.category === category.data.name))
+      postOfTheCategory = allPosts.filter((post) => (post.category === category.data.name))
     }
 
     return(
@@ -45,7 +46,7 @@ class CategoriesInfo extends Component {
               </div>
             </div>
             <hr />
-            
+            {console.log(postOfTheCategory)}
           </div>
     )
   }
