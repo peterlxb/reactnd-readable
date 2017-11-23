@@ -6,7 +6,7 @@ import Categories from './Categories'
 import LogoImg from '../images/readable-logo.png'
 import { fetchAllCategories } from '../actions/categories'
 import { fetchPosts } from '../actions/posts'
-import PostInfo from './PostInfo'
+import SinglePost from './SinglePost'
 
 const objectToArray = obj => {
  if (obj) return Object.keys(obj).map(key => obj[key])
@@ -44,7 +44,7 @@ class PostView extends Component{
             </div>
             <hr />
             <div className="readable-posts">
-            {postOfTheCategory.length > 0 &&   <PostInfo posts={postOfTheCategory}/>}
+            {postOfTheCategory.length > 0 &&   <SinglePost post={postOfTheCategory}/>}
             </div>
       </div>
     )
