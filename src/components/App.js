@@ -14,6 +14,7 @@ import Home from './Home'
 import AddPost from './AddPost'
 import CategoriesInfo from './CategoriesInfo'
 import EditPost from './EditForm'
+import PostView from './PostView'
 
  const objectToArray = obj => {
   if (obj) return Object.keys(obj).map(key => obj[key])
@@ -64,6 +65,15 @@ render() {
                   posts={posts}
                 />}
               />
+              <Route
+                path="/:category/:postId"
+                render={({ match }) =>
+                <PostView
+                  postId={match.params.postId}
+                  categoryUrl={match.params.category}
+                
+                />}
+        />
         </Switch>
       </div>
     );

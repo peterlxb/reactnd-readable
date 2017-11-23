@@ -23,6 +23,7 @@ class EditPost extends Component {
 
   componentWillMount() {
     const { id } = this.props.match.params
+    console.log(this.props.getPost)
     this.props.getPost(id)
       .then(() => {
         const { title, author, body, category, voteScore } = this.props.post

@@ -67,7 +67,12 @@ class PostInfo extends Component {
                       <a
                       className="is-size-4"
                       >
+                      <Link
+                      to={'/' + post.category + '/' + post.id}
+                      className="is-size-4"
+                    >
                       {post.title}
+                    </Link>
                       </a>
                     </p>
                   </div>
