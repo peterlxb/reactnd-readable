@@ -16,7 +16,7 @@ class SinglePost extends Component {
 
   render() {
     const { post } = this.props
-
+    const commentsToShow = post[0].comments;
     return(
       <div>
       {post &&
@@ -24,7 +24,7 @@ class SinglePost extends Component {
           style={{ marginBottom: '50px' }}>
           <div className="columns is-mobile">
 
-
+              {console.log(post[0].comments)}
               <div className="column" style={{ maxWidth: '115px' }}>
                 <div className="readable-voteScore-wrapper">
                   <div className={'readable-voteScore-value notification '}>
@@ -40,7 +40,7 @@ class SinglePost extends Component {
                       </a>
                   </div>
                 </div>
-            
+
 
             <div className="column">
               <h1>
@@ -78,10 +78,101 @@ class SinglePost extends Component {
                   edit
                 </Link>
               </div>
+              {commentsToShow &&
+                  commentsToShow.length > 0 &&
+                  <div>
+                    {commentsToShow.length > 1
+                      ? <div>
+                          <div className="select right">
+
+                          </div>
+                          <h3>
+                            {commentsToShow.length} comments:
+                          </h3>
+                        </div>
+                      : <h3>
+                          {commentsToShow.length} comment:
+                        </h3>}
+                    {commentsToShow.map((comment, index) =>(
+                      <section className="content readable-comment">
+                        <div className="columns is-mobile">
+
+                          <div className="column" style={{ maxWidth: '115px' }}>
+                            <div className="readable-voteScore-wrapper">
+                              <div className={'readable-voteScore-value notification '}>
+                                  {comment.voteScore}
+                              </div>
+                                  <a className="button is-success is-outlined"
+                                    onClick={() => {}}>
+                                    <i className="fa fa-thumbs-o-up" aria-hidden="true" />
+                                  </a>
+                                  <a className="button is-danger is-outlined"
+                                    onClick={() => {}}>
+                                    <i className="fa fa-thumbs-o-down" aria-hidden="true" />
+                                  </a>
+                              </div>
+                            </div>
+
+                          <div className="column">
+                          <div>
+                             <strong>{comment.author}</strong>
+                             &nbsp;
+                             <small>{comment.timestamp}</small>
+                             &nbsp; · &nbsp;
+                             <span>
+                              <div onClick={() => {}} className="button is-small is-danger is-outlined">
+                                delete
+                              </div>
+                              &nbsp;
+                              <div onClick={() => {}} className="button is-small is-info is-outlined">
+                              edit
+                              </div>
+                              </span>
+                             <br/>
+                             <div className="content">
+                              {comment.body.split('\n').map((item, key) => {
+                                return (
+                                  <span key={key}>
+                                  {item}
+                                  <br />
+                              </span>
+                            )
+                              })}
+                            </div>
+                           </div>
+                          </div>
+                        </div>
+                      </section>
+                      )
+                    )}
+
+                  </div>}
+
+                  <div className="newCommentWapper">
+                    <h4>
+                      Add a comment:
+                    </h4>
+                    <input className="input has-bottom-margin"
+                      type="text"
+                      name="commentAuthor"
+                      placeholder="your username"
+                      onChange={() => {}} />
+                    <textarea
+                      className="textarea has-bottom-margin"
+                      r
+                      type="text"
+                      name="newComment"
+                      placeholder="add a comment..."
+                      onChange={() => {}} />
+                    <div className="button has-bottom-mini-margin">Post Comment</div>
+
+                    
+                  </div>
+
             </div>
             </div>
-          </div>
-          }
+          </div>}
+
         </div>
       )
   }
