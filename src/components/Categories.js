@@ -4,14 +4,18 @@ import {Link} from 'react-router-dom'
 class Categories extends Component {
 
     render(){
-      const { categories ,posts} = this.props
+      const { categories,posts} = this.props
 
       return(
         <div className="columns">
 
         {categories && categories.map((category,index) => {
 
-          let numberOfPosts = posts.filter(post => post.category === category.name).length;
+          if(posts) {
+            var numberOfPosts = posts.filter(post => post.category === category.name).length;
+          } else {
+            var numberOfPosts = 0
+          }
 
           return (
             <Link to={"/category/"+category.name} className="column">

@@ -23,7 +23,7 @@ import PostView from './PostView'
 
 class App extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getCategories();
     this.props.getPosts();
 
