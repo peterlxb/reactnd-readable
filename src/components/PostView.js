@@ -5,10 +5,19 @@ import Posts from './posts'
 import Categories from './Categories'
 import LogoImg from '../images/readable-logo.png'
 import { fetchAllCategories } from '../actions/categories'
-import { fetchPosts } from '../actions/posts'
+import { fetchPosts ,fetchPost} from '../actions/posts'
 import SinglePost from './SinglePost'
+import {
+  getAllPosts,
+  getPost,
+} from '../utils/readableAPI'
 
 class PostView extends Component{
+
+  componentDidMount() {
+
+    this.props.getPost(this.props.postId);
+  }
 
   render() {
     const {categories, posts,postId} = this.props
@@ -24,7 +33,7 @@ class PostView extends Component{
                 <img src={LogoImg} width="112" height="26" alt="This a logo of redux project"/>
               </Link>
           </div>
-          {console.log(postOfTheCategory)}
+
           <div className="navbar-end">
             <div className="navbar-item">
                 <div className="field is-grouped">
@@ -57,6 +66,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getCategories: () => dispatch(fetchAllCategories()),
     getPosts: () => dispatch(fetchPosts()),
+    getPost: (id) => dispatch(fetchPost(id))
 
   }
 }

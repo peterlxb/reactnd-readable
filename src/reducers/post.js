@@ -8,7 +8,7 @@ import {
   GET_POST,
 } from '../actions/posts'
 
-export const post = (state={},action) => {
+export const post = (state={post: {} },action) => {
   switch(action.type){
     case GET_POST:
       action.post.comments = action.comments
