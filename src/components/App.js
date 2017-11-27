@@ -71,7 +71,7 @@ render() {
                 <PostView
                   postId={match.params.postId}
                   categoryUrl={match.params.category}
-                
+
                 />}
         />
         </Switch>
@@ -79,10 +79,10 @@ render() {
     );
   }
 }
-function mapStateToProps(state) {
+function mapStateToProps({categories,posts}) {
   return {
-    categories: state.categories,
-    posts: objectToArray(state.posts),
+    categories: categories.categories,
+    posts: posts.posts,
 
   }
 }

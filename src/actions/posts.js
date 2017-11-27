@@ -7,6 +7,10 @@ import {
   editPost,
   getAllPostsForCategory,
   votePost,
+  addComment,
+  deleteComment,
+  editComment,
+  voteComment
 } from '../utils/readableAPI'
 
 export const GET_ALL_POSTS = "GET_ALL_POSTS"
@@ -19,6 +23,10 @@ export const REMOVE_POST = 'REMOVE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DOWN_VOTE = 'DOWN_VOTE'
 export const UP_VOTE = 'UP_VOTE'
+export const ADD_COMMENT ='ADD_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 function getPosts(post,comments){
   return {
@@ -139,3 +147,34 @@ export const upVoteAction = (id) => dispatch => (
       })
     })
   )
+
+export const addCommentAction = (comment) => dispatch => {
+  return addComment(comment)
+            .then(comment => {
+              dispatch({
+                type:ADD_COMMENT,
+                comment
+              })
+            })
+        }
+
+  export const deleteCommentAction = (id) => dispatch => {
+    return deleteComment(id)
+              .then(() => {
+                dispatch({
+                  type:DELETE_COMMENT,
+                  id
+                })
+              })
+        }
+
+  export const editCommentAction = (id,comment) => dispatch => {
+    return editComment(id,comment)
+              .then((comment) => {
+                dispatch({
+                  type:EDIT_COMMENT,
+                  id,
+                  comment
+                })
+              })
+        }

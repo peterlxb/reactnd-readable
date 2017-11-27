@@ -190,11 +190,11 @@ class EditPost extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps({posts, categories,post}){
   return{
-    posts:objectToArray(state.posts),
-    categories:state.categories,
-    post:state.post
+    posts:posts.posts,
+    categories:categories.categories,
+    post:post.post
   }
 }
 

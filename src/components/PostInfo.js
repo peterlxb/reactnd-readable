@@ -3,10 +3,6 @@ import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { deletePosts } from '../actions/posts'
 
-const objectToArray = obj => {
- if (obj) return Object.keys(obj).map(key => obj[key])
- else return []
-}
 
 class PostInfo extends Component {
 
@@ -131,9 +127,9 @@ class PostInfo extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps({categories}){
   return {
-    categories:state.categories
+    categories:categories.categories
   }
 }
 

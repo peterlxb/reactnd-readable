@@ -5,13 +5,13 @@ class Categories extends Component {
 
     render(){
       const { categories ,posts} = this.props
-      const allPosts = posts[0];
+
       return(
         <div className="columns">
 
         {categories && categories.map((category,index) => {
-        
-          let numberOfPosts = allPosts.filter(post => post.category === category.name).length;
+
+          let numberOfPosts = posts.filter(post => post.category === category.name).length;
 
           return (
             <Link to={"/category/"+category.name} className="column">

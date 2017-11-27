@@ -8,16 +8,11 @@ import { fetchAllCategories } from '../actions/categories'
 import { fetchPosts } from '../actions/posts'
 import SinglePost from './SinglePost'
 
-const objectToArray = obj => {
- if (obj) return Object.keys(obj).map(key => obj[key])
- else return []
-}
-
 class PostView extends Component{
 
   render() {
     const {categories, posts,postId} = this.props
-    const allPosts = posts[0]
+    const allPosts = posts
     let postOfTheCategory = []
     if(posts) {
       postOfTheCategory = allPosts.filter((post) => (post.id === postId))
@@ -51,9 +46,9 @@ class PostView extends Component{
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({posts}) {
   return {
-    posts: objectToArray(state.posts),
+    posts: posts.posts,
 
   }
 }

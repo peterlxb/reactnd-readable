@@ -11,6 +11,7 @@ import {
 export const post = (state={},action) => {
   switch(action.type){
     case GET_POST:
+      action.post.comments = action.comments
      return {
        ...state,
        post:action.post

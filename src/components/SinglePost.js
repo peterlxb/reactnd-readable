@@ -3,11 +3,9 @@ import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { deletePosts } from '../actions/posts'
 import Comments from './Comments'
+import AddComment from './AddComment'
 
-const objectToArray = obj => {
- if (obj) return Object.keys(obj).map(key => obj[key])
- else return []
-}
+
 
 class SinglePost extends Component {
 
@@ -101,26 +99,7 @@ class SinglePost extends Component {
 
                   </div>}
 
-                  <div className="newCommentWapper">
-                    <h4>
-                      Add a comment:
-                    </h4>
-                    <input className="input has-bottom-margin"
-                      type="text"
-                      name="commentAuthor"
-                      placeholder="your username"
-                      onChange={() => {}} />
-                    <textarea
-                      className="textarea has-bottom-margin"
-                      r
-                      type="text"
-                      name="newComment"
-                      placeholder="add a comment..."
-                      onChange={() => {}} />
-                    <div className="button has-bottom-mini-margin">Post Comment</div>
-
-
-                  </div>
+                  <AddComment />
 
             </div>
             </div>
@@ -131,9 +110,9 @@ class SinglePost extends Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps({categories}){
   return {
-    categories:state.categories
+    categories:categories.categories
   }
 }
 

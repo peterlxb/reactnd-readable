@@ -6,10 +6,14 @@ import {
 
 const initialCategoryState = [];
 
-export const categories = (state=initialCategoryState,action) => {
+export const categories = (state={categories:[] },action) => {
   switch(action.type){
     case GET_CATEGORIES:
-      return action.categories
+      return{
+        ...state,
+        categories: action.categories
+      }
+
     default:
       return state
   }

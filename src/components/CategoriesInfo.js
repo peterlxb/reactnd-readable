@@ -20,7 +20,7 @@ class CategoriesInfo extends Component {
   render() {
     const { categories, posts, categoryPath } = this.props
     const category = this.getCategory(categories)
-    const allPosts = posts[0];
+    const allPosts = posts;
 
     let postOfTheCategory = []
     if(category && posts) {
