@@ -8,7 +8,7 @@ class Comments extends Component {
   state = {
     edit: false,
     editId: '',
-    comment:'',
+    body:'',
     author:''
   }
 
@@ -23,13 +23,14 @@ class Comments extends Component {
     })
   }
 
-  onEdit = (id, editId, comment) => {
-    if(comment){
+  onEdit = (id) => {
+    const {editId, body, author} = this.state
+
       this.props.editComment(editId, {
-        timestamp:Date.now(),
-        body: comment
+        author,
+        body,
       })
-    }
+
     this.setState({
       edit: !this.state.edit,
       editId:id
@@ -38,7 +39,7 @@ class Comments extends Component {
 
   onChangeComment = (e) => {
     this.setState({
-      comment: e.target.value
+      body: e.target.value
     })
   }
 
@@ -79,18 +80,18 @@ class Comments extends Component {
                   type="text"
                   className="input"
                   name="commentAuthor"
-                  defaultValue={comment.author}
+                  value={this.state.author}
                   onChange={this.onChangeAuthor}
                 />
                 <textarea
                   className="textarea has-bottom-margin"
                   name="commentBody"
-                  defaultValue={comment.body}
+                  value={this.state.body}
                   onChange={this.onChangeComment}
                 />
                 <div
                   className="button is-success is-small"
-                  onClick={this.onEdit}
+                  onClick={() => this.onEdit(comment.id)}
                 >
                   Update
                 </div>
@@ -154,7 +155,7 @@ function mapStateToProps({post}) {
 function mapDispatchToProps(dispatch){
   return{
     deleteComment:(id) => dispatch(deleteCommentAction(id)),
-    editComment: (id,comment) => dispatch(editCommentAction(id,comment)),
+    editComment: (id,body,author) => dispatch(editCommentAction(id,body,author)),
     getPost: (id) => dispatch(fetchPost(id))
   }
 }
