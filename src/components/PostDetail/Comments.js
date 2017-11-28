@@ -2,10 +2,6 @@ import React,{Component} from 'react'
 
 class Comments extends Component {
 
-  state = {
-    comment: ''
-  }
-
   render() {
     const {comment} = this.props
     return(

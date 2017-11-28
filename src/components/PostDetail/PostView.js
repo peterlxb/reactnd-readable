@@ -30,9 +30,10 @@ class PostView extends Component{
     return(
       <div className="container">
             <Header />
+            {console.log(postOfTheCategory)}
             <hr />
             <div className="readable-posts">
-            {postOfTheCategory.length > 0 &&   <PostInfo post={postOfTheCategory}/>}
+            {postOfTheCategory.length > 0 &&   <PostInfo post={postOfTheCategory} postId={postId}/>}
             </div>
       </div>
     )

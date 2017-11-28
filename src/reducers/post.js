@@ -6,6 +6,8 @@ import {
   GET_POST_CATEGORY,
   EDIT_POST,
   GET_POST,
+  ADD_COMMENT,
+  DELETE_COMMENT
 } from '../actions/posts'
 
 export const post = (state={post: {} },action) => {
@@ -16,6 +18,15 @@ export const post = (state={post: {} },action) => {
        ...state,
        post:action.post
      }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post:{
+          ...state.post,
+          comments:[...state.post.comments,action.comments]
+        }
+      }
+
     default:
       return state
   }

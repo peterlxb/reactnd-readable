@@ -6,7 +6,6 @@ import Comments from './Comments'
 import AddComment from './AddComment'
 
 
-
 class PostInfo extends Component {
 
   onDeleteClick = (id) => {
@@ -14,7 +13,7 @@ class PostInfo extends Component {
   }
 
   render() {
-    const { post } = this.props
+    const { post ,postId} = this.props
     const commentsToShow = post[0].comments;
     return(
       <div>
@@ -23,7 +22,7 @@ class PostInfo extends Component {
           style={{ marginBottom: '50px' }}>
           <div className="columns is-mobile">
 
-              {console.log(post[0].comments)}
+              {console.log(postId)}
               <div className="column" style={{ maxWidth: '115px' }}>
                 <div className="readable-voteScore-wrapper">
                   <div className={'readable-voteScore-value notification '}>
@@ -99,7 +98,7 @@ class PostInfo extends Component {
 
                   </div>}
 
-                  <AddComment />
+                  <AddComment postId={postId}/>
 
             </div>
             </div>

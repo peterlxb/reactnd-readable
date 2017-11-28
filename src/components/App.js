@@ -32,6 +32,7 @@ render() {
     return (
       <div>
         <Switch>
+
           <Route
             exact
             path ="/"
@@ -41,17 +42,18 @@ render() {
                 posts={posts}
               />}
              />
+
             <Route
               path ="/new"
               render={() =>
-              <AddPost
-
-              />}
+              <AddPost/>}
               />
+
               <Route
                 path="/edit/:id"
                 component={EditPost}
               />
+
             <Route
               path="/category/:url"
               render={({match}) =>
@@ -61,15 +63,15 @@ render() {
                   posts={posts}
                 />}
               />
+
               <Route
                 path="/:category/:postId"
                 render={({ match }) =>
                 <PostView
                   postId={match.params.postId}
                   categoryUrl={match.params.category}
-
-                />}
-        />
+                  />}
+                />
         </Switch>
       </div>
     );

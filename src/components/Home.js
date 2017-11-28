@@ -9,19 +9,19 @@ import Header from './Header'
 
 class Home extends Component{
   render(){
+
     const {categories,posts} = this.props
+
     return(
       <div className="container">
-
-            <Header />
-            <hr />
-
-          <div className="container">
-            <h2 className="title is-3 is-spaced">Categories</h2>
-            <Categories categories={categories} posts={posts}/>
-          </div>
-          <hr />
-          <Posts posts={posts}/>
+        <Header />
+        <hr />
+        <div className="container">
+          <h2 className="title is-3 is-spaced">Categories</h2>
+           <Categories categories={categories} posts={posts}/>
+        </div>
+        <hr />
+        <Posts posts={posts}/>
       </div>
     )
   }
