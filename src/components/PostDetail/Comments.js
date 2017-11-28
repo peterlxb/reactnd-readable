@@ -98,7 +98,7 @@ class Comments extends Component {
                 &nbsp;
                 <div
                   className="button is-small"
-                  onClick={() => window.history.back()}
+                  onClick={() => this.onEditButton(comment.id)}
                 >
                   Cancel
                 </div>
