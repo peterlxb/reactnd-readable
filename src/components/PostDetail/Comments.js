@@ -80,13 +80,13 @@ class Comments extends Component {
                   type="text"
                   className="input"
                   name="commentAuthor"
-                  value={this.state.author}
+                  defaultValue={comment.author}
                   onChange={this.onChangeAuthor}
                 />
                 <textarea
                   className="textarea has-bottom-margin"
                   name="commentBody"
-                  value={this.state.body}
+                  defaultValue={comment.body}
                   onChange={this.onChangeComment}
                 />
                 <div
