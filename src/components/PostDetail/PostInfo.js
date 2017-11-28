@@ -1,13 +1,13 @@
 import React,{ Component } from 'react'
 import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { deletePosts } from '../actions/posts'
+import { deletePosts } from '../../actions/posts'
 import Comments from './Comments'
 import AddComment from './AddComment'
 
 
 
-class SinglePost extends Component {
+class PostInfo extends Component {
 
   onDeleteClick = (id) => {
     this.props.deletePost(id)
@@ -122,4 +122,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SinglePost)
+export default connect(mapStateToProps,mapDispatchToProps)(PostInfo)

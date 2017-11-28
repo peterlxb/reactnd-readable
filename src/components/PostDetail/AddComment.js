@@ -1,11 +1,11 @@
 import React,{Component} from 'react'
 import uuidv1 from 'uuid/v1'
 import { connect } from 'react-redux'
-import { fetchPosts ,fetchPost,addCommentAction} from '../actions/posts'
+import { fetchPosts ,fetchPost,addCommentAction} from '../../actions/posts'
 import {
   getAllPosts,
   getPost,
-} from '../utils/readableAPI'
+} from '../../utils/readableAPI'
 
 class AddComment extends Component{
 

@@ -14,7 +14,7 @@ import Home from './Home'
 import AddPost from './NewPost/AddPost'
 import CategoriesInfo from './Categories/CategoriesInfo'
 import EditPost from './Posts/EditForm'
-import PostView from './PostView'
+import PostView from './PostDetail/PostView'
 
 
 class App extends Component {

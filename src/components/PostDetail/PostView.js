@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Posts from './Posts/Post'
-import Categories from './Categories/Categories'
-import LogoImg from '../images/readable-logo.png'
-import { fetchAllCategories } from '../actions/categories'
-import { fetchPosts ,fetchPost} from '../actions/posts'
-import SinglePost from './SinglePost'
+import Posts from '../Posts/Post'
+import Categories from '../Categories/Categories'
+import LogoImg from '../../images/readable-logo.png'
+import { fetchAllCategories } from '../../actions/categories'
+import { fetchPosts ,fetchPost} from '../../actions/posts'
+import PostInfo from './PostInfo'
 import {
   getAllPosts,
   getPost,
-} from '../utils/readableAPI'
-import Header from './Header'
+} from '../../utils/readableAPI'
+import Header from '../Header'
 
 class PostView extends Component{
 
@@ -32,7 +32,7 @@ class PostView extends Component{
             <Header />
             <hr />
             <div className="readable-posts">
-            {postOfTheCategory.length > 0 &&   <SinglePost post={postOfTheCategory}/>}
+            {postOfTheCategory.length > 0 &&   <PostInfo post={postOfTheCategory}/>}
             </div>
       </div>
     )
