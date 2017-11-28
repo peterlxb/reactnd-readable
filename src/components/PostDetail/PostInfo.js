@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import { deletePosts } from '../../actions/posts'
 import Comments from './Comments'
 import AddComment from './AddComment'
+import { showDate } from '../../utils/helpers'
 
 
 class PostInfo extends Component {
@@ -53,7 +54,7 @@ class PostInfo extends Component {
                 <strong>{post[0].author}</strong>
                 &nbsp; · &nbsp;
                 <i className="fa fa-clock-o" aria-hidden="true" />{' '}
-                {post[0].timestamp}
+                {showDate(post[0].timestamp)}
                 &nbsp; · &nbsp; Category:{' '}
                 <Link
                   className="tag is-small is-primary is-outlined"

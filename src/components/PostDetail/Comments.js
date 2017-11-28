@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import { deleteCommentAction,editCommentAction ,fetchPost} from '../../actions/posts'
+import { showDate } from '../../utils/helpers'
 
 
 class Comments extends Component {
@@ -109,7 +110,7 @@ class Comments extends Component {
               <div>
                  <strong>{comment.author}</strong>
                  &nbsp;
-                 <small>{comment.timestamp}</small>
+                 <small>{showDate(comment.timestamp)}</small>
                  &nbsp; · &nbsp;
                  <span>
                   <div onClick={() => this.onDeleteClick(comment.id)} className="button is-small is-danger is-outlined">

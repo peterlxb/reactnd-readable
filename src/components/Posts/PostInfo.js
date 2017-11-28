@@ -2,7 +2,7 @@ import React,{ Component } from 'react'
 import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { deletePosts } from '../../actions/posts'
-
+import { showDate } from '../../utils/helpers'
 
 class PostInfo extends Component {
 
@@ -57,7 +57,7 @@ class PostInfo extends Component {
                         &nbsp; · &nbsp;
                       <small>
                       <i className="fa fa-clock-o" aria-hidden="true" />{' '}
-                      {Date(post.timestamp)}
+                      {showDate(post.timestamp)}
                       </small>
                       <br />
                       <a
