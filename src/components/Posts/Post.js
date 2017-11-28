@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {Link }from 'react-router-dom'
-import { deletePosts } from '../actions/posts'
+import { deletePosts } from '../../actions/posts'
 import PostInfo from './PostInfo'
 
 class Posts extends Component {

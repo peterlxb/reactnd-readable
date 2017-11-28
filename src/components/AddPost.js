@@ -30,7 +30,7 @@ class AddPost extends Component {
         author,
         body
       }
-      {console.log(this.props.addPosts)}
+      
       this.props.addPosts(newPost)
         .then(() => this.setState({
           success: true,

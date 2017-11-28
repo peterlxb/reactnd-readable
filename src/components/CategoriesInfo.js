@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import LogoImg from '../images/readable-logo.png'
-import PostInfo from './PostInfo'
+import PostInfo from './Posts/PostInfo'
 import Header from './Header'
 
 class CategoriesInfo extends Component {
@@ -32,7 +32,7 @@ class CategoriesInfo extends Component {
       <div className="container">
             <Header />
             <hr />
-            {console.log(postOfTheCategory)}
+
 
             <div className="readable-posts">
 

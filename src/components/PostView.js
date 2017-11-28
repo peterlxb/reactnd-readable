@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Posts from './posts'
+import Posts from './Posts/Post'
 import Categories from './Categories'
 import LogoImg from '../images/readable-logo.png'
 import { fetchAllCategories } from '../actions/categories'

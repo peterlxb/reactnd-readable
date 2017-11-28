@@ -16,10 +16,6 @@ import CategoriesInfo from './CategoriesInfo'
 import EditPost from './EditForm'
 import PostView from './PostView'
 
- const objectToArray = obj => {
-  if (obj) return Object.keys(obj).map(key => obj[key])
-  else return []
-}
 
 class App extends Component {
 
