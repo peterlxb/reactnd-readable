@@ -14,10 +14,10 @@ class AddComment extends Component{
     author:''
   }
 
-  componentDidMount() {
-    const { postId } =  this.props
-    this.props.getPost(postId)
-  }
+  // componentDidMount() {
+  //   const { postId } =  this.props
+  //
+  // }
 
   onInputAuthor = (e) => {
     this.setState({
@@ -49,7 +49,11 @@ class AddComment extends Component{
             author:''
           })
         })
+
+        
     }
+
+
   }
 
   render() {
@@ -59,7 +63,7 @@ class AddComment extends Component{
 
     return(
       <div className="newCommentWapper">
-        {console.log(postId)}
+
         <h4>
           Add a comment:
         </h4>

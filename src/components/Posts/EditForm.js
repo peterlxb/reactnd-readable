@@ -73,7 +73,7 @@ class EditPost extends Component {
 
   render() {
 
-    const { categories,posts } = this.props
+    const { categories,posts ,post} = this.props
     const {id,category} = this.state
 
     return(
@@ -97,7 +97,7 @@ class EditPost extends Component {
                     className="input"
                     type="text"
                     name="title"
-                    value={this.state.title}
+                    defaultValue={post.title}
                     onChange={event => this.onTitleChange(event)}
                     placeholder="Title"
                   />
@@ -113,7 +113,7 @@ class EditPost extends Component {
                     name="author"
                     onChange={event => this.onAuthorChange(event)}
                     placeholder="your username"
-                    value={this.state.author}
+                    defaultValue={post.author}
                   />
                   <span className="icon is-small is-left">
                     <i className="fa fa-user" />
@@ -131,7 +131,7 @@ class EditPost extends Component {
                   <div className="select">
                     <select
                       name="category"
-                      value={this.state.category}
+                      defaultValue={post.category}
                       onChange={this.onCategoryChange}
                     >
                       <option value="0">Select category</option>
@@ -153,7 +153,7 @@ class EditPost extends Component {
                     name="body"
                     onChange={event => this.onBodyChange(event)}
                     className="textarea"
-                    value={this.state.body}
+                    defaultValue={post.body}
                     placeholder="Your message"
                   />
                 </div>

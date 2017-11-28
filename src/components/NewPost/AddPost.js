@@ -5,6 +5,9 @@ import LogoImg from '../../images/readable-logo.png'
 import uuidv1 from 'uuid/v1'
 import { addPost } from '../../actions/posts'
 import Header from '../Header'
+import {
+  getAllPosts
+} from '../../utils/readableAPI'
 
 class AddPost extends Component {
 
@@ -40,6 +43,8 @@ class AddPost extends Component {
           body: '',
           notValid: false
         }))
+
+        getAllPosts();
     } else {
       this.setState({
         notValid: true,
@@ -199,7 +204,7 @@ function mapStateToProps({categories}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addPosts: (post) => dispatch(addPost(post))
+    addPosts: (post) =>  dispatch(addPost(post))
   }
 }
 
