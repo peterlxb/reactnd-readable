@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch,Link } from 'react-router-dom'
 import LogoImg from '../images/readable-logo.png'
-import Categories from './Categories'
-import AddPost from './AddPost'
+import Categories from './Categories/Categories'
+import AddPost from './NewPost/AddPost'
 import Posts from './Posts/Post'
 import Header from './Header'
 

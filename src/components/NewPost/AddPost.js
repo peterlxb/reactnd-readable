@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import LogoImg from '../images/readable-logo.png'
+import LogoImg from '../../images/readable-logo.png'
 import uuidv1 from 'uuid/v1'
-import { addPost } from '../actions/posts'
-import Header from './Header'
+import { addPost } from '../../actions/posts'
+import Header from '../Header'
 
 class AddPost extends Component {
 
@@ -30,7 +30,7 @@ class AddPost extends Component {
         author,
         body
       }
-      
+
       this.props.addPosts(newPost)
         .then(() => this.setState({
           success: true,

@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { fetchPost,editPostAction } from '../actions/posts'
-
-const objectToArray = obj => {
- if (obj) return Object.keys(obj).map(key => obj[key])
- else return []
-}
+import { fetchPost,editPostAction } from '../../actions/posts'
 
 class EditPost extends Component {
 

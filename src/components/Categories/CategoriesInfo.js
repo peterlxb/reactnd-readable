@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import LogoImg from '../images/readable-logo.png'
-import PostInfo from './Posts/PostInfo'
-import Header from './Header'
+import LogoImg from '../../images/readable-logo.png'
+import PostInfo from '../Posts/PostInfo'
+import Header from '../Header'
 
 class CategoriesInfo extends Component {
 

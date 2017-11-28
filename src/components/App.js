@@ -11,9 +11,9 @@ import {
   getPost,
 } from '../utils/readableAPI'
 import Home from './Home'
-import AddPost from './AddPost'
-import CategoriesInfo from './CategoriesInfo'
-import EditPost from './EditForm'
+import AddPost from './NewPost/AddPost'
+import CategoriesInfo from './Categories/CategoriesInfo'
+import EditPost from './Posts/EditForm'
 import PostView from './PostView'
 
 
