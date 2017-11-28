@@ -97,7 +97,7 @@ class PostInfo extends Component {
                     )}
 
                   </div>}
-
+                  <br/>
                   <AddComment postId={postId}/>
 
             </div>

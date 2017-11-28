@@ -5,8 +5,47 @@ import { deleteCommentAction,editCommentAction ,fetchPost} from '../../actions/p
 
 class Comments extends Component {
 
+  state = {
+    edit: false,
+    editId: '',
+    comment:'',
+    author:''
+  }
+
   onDeleteClick = (id) => {
     this.props.deleteComment(id)
+  }
+
+  onEditButton = (id, editId) => {
+    this.setState({
+      edit: !this.state.edit,
+      editId:id
+    })
+  }
+
+  onEdit = (id, editId, comment) => {
+    if(comment){
+      this.props.editComment(editId, {
+        timestamp:Date.now(),
+        body: comment
+      })
+    }
+    this.setState({
+      edit: !this.state.edit,
+      editId:id
+    })
+  }
+
+  onChangeComment = (e) => {
+    this.setState({
+      comment: e.target.value
+    })
+  }
+
+  onChangeAuthor = (e) => {
+    this.setState({
+      author: e.target.value
+    })
   }
 
   render() {
@@ -32,34 +71,73 @@ class Comments extends Component {
               </div>
             </div>
 
-          <div className="column">
-          <div>
-             <strong>{comment.author}</strong>
-             &nbsp;
-             <small>{comment.timestamp}</small>
-             &nbsp; · &nbsp;
-             <span>
-              <div onClick={() => this.onDeleteClick(comment.id)} className="button is-small is-danger is-outlined">
-                delete
+
+              { this.state.edit ?
+
+                (<div className="editCommentArea">
+                <input
+                  type="text"
+                  className="input"
+                  name="commentAuthor"
+                  defaultValue={comment.author}
+                  onChange={this.onChangeAuthor}
+                />
+                <textarea
+                  className="textarea has-bottom-margin"
+                  name="commentBody"
+                  defaultValue={comment.body}
+                  onChange={this.onChangeComment}
+                />
+                <div
+                  className="button is-success is-small"
+                  onClick={this.onEdit}
+                >
+                  Update
+                </div>
+                &nbsp;
+                <div
+                  className="button is-small"
+                  onClick={() => window.history.back()}
+                >
+                  Cancel
+                </div>
               </div>
-              &nbsp;
-              <div onClick={() =>{}} className="button is-small is-info is-outlined">
-              edit
-              </div>
-              </span>
-             <br/>
-             <div className="content">
-              {comment.body.split('\n').map((item, key) => {
-                return (
-                  <span key={key}>
-                  {item}
-                  <br />
-              </span>
             )
-              })}
-            </div>
-           </div>
-          </div>
+            : (
+              <div className="column">
+              <div>
+                 <strong>{comment.author}</strong>
+                 &nbsp;
+                 <small>{comment.timestamp}</small>
+                 &nbsp; · &nbsp;
+                 <span>
+                  <div onClick={() => this.onDeleteClick(comment.id)} className="button is-small is-danger is-outlined">
+                    delete
+                  </div>
+                  &nbsp;
+                  <div onClick={() => this.onEditButton(comment.id)} className="button is-small is-info is-outlined">
+                  edit
+                  </div>
+                  </span>
+                 <br/>
+                 <div className="content">
+                  {comment.body.split('\n').map((item, key) => {
+                    return (
+                      <span key={key}>
+                      {item}
+                      <br />
+                      </span>
+                )
+                  })}
+                </div>
+                </div>
+                </div>
+            )
+          }
+
+
+
+
         </div>
       </section>
     )
