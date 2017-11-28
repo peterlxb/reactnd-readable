@@ -11,6 +11,7 @@ import {
   getAllPosts,
   getPost,
 } from '../utils/readableAPI'
+import Header from './Header'
 
 class PostView extends Component{
 
@@ -28,24 +29,7 @@ class PostView extends Component{
     }
     return(
       <div className="container">
-          <div className="navbar-brand">
-              <Link className="navbar-item" to="/">
-                <img src={LogoImg} width="112" height="26" alt="This a logo of redux project"/>
-              </Link>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-                <div className="field is-grouped">
-                  <p className="control">
-                    <Link className="button is-info" to='/new'>
-                      <span className="icon"><i className="fa fa-plus"></i></span>
-                        &nbsp; Add new post
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Header />
             <hr />
             <div className="readable-posts">
             {postOfTheCategory.length > 0 &&   <SinglePost post={postOfTheCategory}/>}

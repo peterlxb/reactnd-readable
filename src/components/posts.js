@@ -4,12 +4,7 @@ import {Link }from 'react-router-dom'
 import { deletePosts } from '../actions/posts'
 import PostInfo from './PostInfo'
 
-
-
-
 class Posts extends Component {
-
-
 
   render() {
     const {posts} = this.props
@@ -20,7 +15,5 @@ class Posts extends Component {
     )
   }
 }
-
-
 
 export default Posts

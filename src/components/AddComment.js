@@ -1,6 +1,18 @@
 import React,{Component} from 'react'
+import uuidv1 from 'uuid/v1'
+import { connect } from 'react-redux'
+import { fetchPosts ,fetchPost,addCommentAction} from '../actions/posts'
+import {
+  getAllPosts,
+  getPost,
+} from '../utils/readableAPI'
 
 class AddComment extends Component{
+
+  state = {
+    txtComment: ''
+  }
+
   render() {
     return(
       <div className="newCommentWapper">
@@ -27,4 +39,17 @@ class AddComment extends Component{
   }
 }
 
-export default AddComment
+const mapStateToProps = ({ post }) => {
+  return {
+    post: post
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPost: (id) => dispatch(fetchPost(id)),
+    addComment: (comment) => dispatch(addCommentAction(comment))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddComment)
