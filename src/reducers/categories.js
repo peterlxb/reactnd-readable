@@ -1,7 +1,5 @@
-
 import {
   GET_CATEGORIES,
-
 } from '../actions/categories'
 
 const initialCategoryState = [];
@@ -13,7 +11,6 @@ export const categories = (state={categories:[] },action) => {
         ...state,
         categories: action.categories
       }
-
     default:
       return state
   }

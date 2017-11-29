@@ -18,7 +18,7 @@ class Categories extends Component {
           }
 
           return (
-            <Link to={"/category/"+category.name} className="column">
+            <Link to={"/category/"+category.name} className="column" key={category.name}>
               <p className={'notification is-centered-text'}>
               <span className="title">{category.name}</span>
               <br />

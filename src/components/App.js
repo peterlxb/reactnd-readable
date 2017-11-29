@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import '../App.css';
 import { fetchAllCategories } from '../actions/categories'
 import { fetchPosts } from '../actions/posts'
-import { fetchComments } from '../actions/comments'
 import {
   getAllPosts,
   getPost,

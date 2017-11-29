@@ -14,11 +14,6 @@ class AddComment extends Component{
     author:''
   }
 
-  // componentDidMount() {
-  //   const { postId } =  this.props
-  //
-  // }
-
   onInputAuthor = (e) => {
     this.setState({
       author: e.target.value
@@ -49,12 +44,8 @@ class AddComment extends Component{
             author:''
           })
         })
-
-        
+      }
     }
-
-
-  }
 
   render() {
     const { postId } = this.props

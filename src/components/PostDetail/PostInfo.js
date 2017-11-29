@@ -101,7 +101,7 @@ class PostInfo extends Component {
                           {commentsToShow.length} comment:
                         </h3>}
                     {commentsToShow.map((comment, index) =>(
-                      <Comments comment={comment}/>
+                      <Comments comment={comment} key={index}/>
                       )
                     )}
 

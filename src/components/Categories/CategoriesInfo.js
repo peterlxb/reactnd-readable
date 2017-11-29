@@ -30,18 +30,12 @@ class CategoriesInfo extends Component {
 
     return(
       <div className="container">
-            <Header />
-            <hr />
-
-
-            <div className="readable-posts">
-
-            {postOfTheCategory.length > 0 &&   <PostInfo posts={postOfTheCategory}/>}
-
-
-
-          </div>
+        <Header />
+        <hr />
+        <div className="readable-posts">
+          {postOfTheCategory.length > 0 &&   <PostInfo posts={postOfTheCategory}/>}
         </div>
+      </div>
     )
   }
 }

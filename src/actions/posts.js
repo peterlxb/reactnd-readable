@@ -65,13 +65,6 @@ export const fetchPosts = () => dispatch => (
     }
 ))
 
-// export const fetchPosts = () => dispatch => (
-//   getAllPosts()
-//     .then((posts) => {
-//       dispatch(getPosts(posts))
-//     })
-// )
-
 export const fetchPost = (id) => dispatch => (
   getPost(id)
     .then(post => {
