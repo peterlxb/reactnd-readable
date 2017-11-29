@@ -25,7 +25,7 @@ class PostInfo extends Component {
       <div>
       {posts.length > 0 && posts.map((post) => (
         <div className="container content has-top-margin"
-          style={{ marginBottom: '50px' }}>
+          style={{ marginBottom: '50px' }} key={post.id}>
           <div className="columns">
 
             <div className="column">
@@ -38,14 +38,14 @@ class PostInfo extends Component {
                       <div className={'readable-voteScore-value notification '}>
                             {post.voteScore}
                         </div>
-                      <a className="button is-success is-outlined"
+                      <div className="button is-success is-outlined"
                         onClick={() => this.onClickUpVote(post.id)}>
                         <i className="fa fa-thumbs-o-up" aria-hidden="true" />
-                      </a>
-                      <a className="button is-danger is-outlined"
+                      </div>
+                      <div className="button is-danger is-outlined"
                         onClick={() => this.onClickDownVote(post.id)}>
                         <i className="fa fa-thumbs-o-down" aria-hidden="true" />
-                      </a>
+                      </div>
                     </div>
                    </div>
                    </figure>
@@ -68,7 +68,7 @@ class PostInfo extends Component {
                       {showDate(post.timestamp)}
                       </small>
                       <br />
-                      <a
+                      <span
                       className="is-size-4"
                       >
                       <Link
@@ -77,7 +77,7 @@ class PostInfo extends Component {
                     >
                       {post.title}
                     </Link>
-                      </a>
+                      </span>
                     </p>
                   </div>
 
