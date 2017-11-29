@@ -1,13 +1,21 @@
 import React,{ Component } from 'react'
 import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { deletePosts } from '../../actions/posts'
+import { deletePosts,upVoteAction,downVoteAction } from '../../actions/posts'
 import { showDate } from '../../utils/helpers'
 
 class PostInfo extends Component {
 
   onDeleteClick = (id) => {
     this.props.deletePost(id)
+  }
+
+  onClickUpVote = (id) => {
+    this.props.upVote(id)
+  }
+
+  onClickDownVote = (id) => {
+    this.props.downVote(id)
   }
 
   render() {
@@ -31,11 +39,11 @@ class PostInfo extends Component {
                             {post.voteScore}
                         </div>
                       <a className="button is-success is-outlined"
-                        onClick={() => {}}>
+                        onClick={() => this.onClickUpVote(post.id)}>
                         <i className="fa fa-thumbs-o-up" aria-hidden="true" />
                       </a>
                       <a className="button is-danger is-outlined"
-                        onClick={() => {}}>
+                        onClick={() => this.onClickDownVote(post.id)}>
                         <i className="fa fa-thumbs-o-down" aria-hidden="true" />
                       </a>
                     </div>
@@ -135,7 +143,9 @@ function mapStateToProps({categories}){
 
 function mapDispatchToProps(dispatch){
   return{
-    deletePost: (id) => dispatch(deletePosts(id))
+    deletePost: (id) => dispatch(deletePosts(id)),
+    upVote: (id) => dispatch(upVoteAction(id)),
+    downVote: (id) => dispatch(downVoteAction(id))
   }
 }
 

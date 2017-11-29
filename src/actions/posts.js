@@ -23,10 +23,13 @@ export const REMOVE_POST = 'REMOVE_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const DOWN_VOTE = 'DOWN_VOTE'
 export const UP_VOTE = 'UP_VOTE'
+export const VOTE_POST = 'VOTE_POST'
 export const ADD_COMMENT ='ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
+export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
+export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
 
 function getPosts(post,comments){
   return {
@@ -178,3 +181,28 @@ export const addCommentAction = (comment) => dispatch => {
                 })
               })
         }
+
+  export const upVoteCommentAction = (id) => dispatch => (
+    voteComment(id,"upVote")
+      .then((comment) => {
+        dispatch({
+          type:UPVOTE_COMMENT,
+          id: comment.id,
+          parentId: comment.parentId,
+          voteScore: comment.voteScore
+        })
+      })
+  )
+
+
+    export const downVoteCommentAction = (id) => dispatch => (
+      voteComment(id,"downVote")
+        .then((comment) => {
+          dispatch({
+            type:DOWNVOTE_COMMENT,
+            id: comment.id,
+            parentId: comment.parentId,
+            voteScore: comment.voteScore
+          })
+        })
+    )

@@ -8,6 +8,8 @@ import {
   GET_POST_CATEGORY,
   EDIT_POST,
   GET_POST,
+  UP_VOTE,
+  DOWN_VOTE
 } from '../actions/posts'
 
 
@@ -49,6 +51,20 @@ export const posts = (state={posts:[]},action) => {
       return {
         posts: [...currentEditPost.slice(0, indexEdit),
         newPostToEdit, ...currentEditPost.slice(indexEdit + 1)]
+      }
+    case UP_VOTE:
+      const currentPostUpVote = [...state.posts]
+      const indexUp = currentPostUpVote.findIndex(post => post.id === action.id)
+      currentPostUpVote[indexUp].voteScore = currentPostUpVote[indexUp].voteScore + 1
+      return {
+        posts: [...currentPostUpVote]
+      }
+    case DOWN_VOTE:
+      const currentPostDownVote = [...state.posts]
+      const indexDown = currentPostDownVote.findIndex(post => post.id === action.id)
+      currentPostDownVote[indexDown].voteScore = currentPostDownVote[indexDown].voteScore - 1
+      return {
+        posts: [...currentPostDownVote]
       }
     case GET_POST_CATEGORY:
       return {
