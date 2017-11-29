@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import { deleteCommentAction,editCommentAction ,fetchPost} from '../../actions/posts'
+import { deleteCommentAction,editCommentAction ,fetchPost,upVoteCommentAction,downVoteCommentAction} from '../../actions/posts'
 import { showDate } from '../../utils/helpers'
 
 
@@ -50,6 +50,14 @@ class Comments extends Component {
     })
   }
 
+  onClickUpVote = (id) => {
+    this.props.upVoteComment(id)
+  }
+
+  onClickDownVote = (id) => {
+    this.props.downVoteComment(id)
+  }
+
   render() {
     const {comment} = this.props
     const {post} = this.props
@@ -63,11 +71,11 @@ class Comments extends Component {
                   {comment.voteScore}
               </div>
                   <a className="button is-success is-outlined"
-                    onClick={() => {}}>
+                    onClick={() => this.onClickUpVote(comment.id)}>
                     <i className="fa fa-thumbs-o-up" aria-hidden="true" />
                   </a>
                   <a className="button is-danger is-outlined"
-                    onClick={() => {}}>
+                    onClick={() => this.onClickDownVote(comment.id) }>
                     <i className="fa fa-thumbs-o-down" aria-hidden="true" />
                   </a>
               </div>
@@ -157,7 +165,9 @@ function mapDispatchToProps(dispatch){
   return{
     deleteComment:(id) => dispatch(deleteCommentAction(id)),
     editComment: (id,body,author) => dispatch(editCommentAction(id,body,author)),
-    getPost: (id) => dispatch(fetchPost(id))
+    getPost: (id) => dispatch(fetchPost(id)),
+    upVoteComment: (id) => dispatch(upVoteCommentAction(id)),
+    downVoteComment: (id) => dispatch(downVoteCommentAction(id))
   }
 }
 

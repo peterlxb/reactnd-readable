@@ -8,7 +8,9 @@ import {
   GET_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  EDIT_COMMENT
+  EDIT_COMMENT,
+  UPVOTE_COMMENT,
+  DOWNVOTE_COMMENT
 } from '../actions/posts'
 
 export const post = (state={post: {} },action) => {
@@ -53,6 +55,33 @@ export const post = (state={post: {} },action) => {
           ...state.post,
           comments: [...editComments.slice(0, indexEditComment),
           newCommentToEdit, ...editComments.slice(indexEditComment + 1)]
+        }
+      }
+    case UPVOTE_COMMENT:
+      const upVoteComments = [...state.post.comments]
+      const indexUpComment = upVoteComments.findIndex(comment => comment.id === action.id)
+      const upScore = action.voteScore
+      const newUpScore = Object.assign({}, upVoteComments[indexUpComment], {
+        voteScore: upScore
+      })
+      return {
+        ...state,
+        comments: [...upVoteComments.slice(0,indexUpComment),
+          newUpScore, ...upVoteComments.slice(indexUpComment + 1)]
+      }
+    case DOWNVOTE_COMMENT:
+      const downVoteComments = [...state.post.comments]
+      const indexDownComment = downVoteComments.findIndex(comment => comment.id === action.id)
+      const downScore = action.voteScore
+      const newDownScore = Object.assign({}, downVoteComments[indexDownComment], {
+        voteScore: downScore
+      })
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: [...downVoteComments.slice(0, indexDownComment),
+          newDownScore, ...downVoteComments.slice(indexDownComment + 1)]
         }
       }
     default:
