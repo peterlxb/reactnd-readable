@@ -14,7 +14,7 @@ import AddPost from './NewPost/AddPost'
 import CategoriesInfo from './Categories/CategoriesInfo'
 import EditPost from './Posts/EditForm'
 import PostView from './PostDetail/PostView'
-
+import NotFound from './NotFound'
 
 class App extends Component {
 
@@ -71,6 +71,8 @@ render() {
                   categoryUrl={match.params.category}
                   />}
                 />
+
+                <Route path="*" component={NotFound} />
         </Switch>
       </div>
     );

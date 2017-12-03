@@ -6,8 +6,7 @@ A content and comment web app, where User can post content to predefined categor
 ## Getting Started
 ### Setup
 ```
-$ git clone
-https://github.com/peterlxb/reactnd-readable
+$ git clone https://github.com/peterlxb/reactnd-readable
 $ cd reactnd-readable
 ```
 ### Install
@@ -21,12 +20,13 @@ This will open app in http://localhost:3000
 ```
 ## Prerequisite
 Backend  Server should be up and running
-### Setup
+### Setup api server
+
 ```
 $ git clone https://github.com/udacity/reactnd-project-readable-starter
 $ cd reactnd-project-readable-starter
 ```
-### Install
+### Install the server
 ```
 $ npm install
 ```
