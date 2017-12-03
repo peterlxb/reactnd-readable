@@ -1,10 +1,10 @@
 import React,{ Component } from 'react'
 import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { deletePosts ,upVoteAction,downVoteAction} from '../../actions/posts'
+import { deletePosts ,upVoteAction,downVoteAction,changeSortAction} from '../../actions/posts'
 import Comments from './Comments'
 import AddComment from './AddComment'
-import { showDate } from '../../utils/helpers'
+import { showDate,sortByDate, sortByScore } from '../../utils/helpers'
 
 
 class PostInfo extends Component {
@@ -22,8 +22,9 @@ class PostInfo extends Component {
   }
 
   render() {
-    const { post ,postId} = this.props
+    const { post ,postId,sortMethod,changeSort} = this.props
     const commentsToShow = post[0].comments;
+    sortMethod === 'date' ? commentsToShow.sort(sortByDate) : commentsToShow.sort(sortByScore)
     return(
       <div>
       {post &&
@@ -90,13 +91,23 @@ class PostInfo extends Component {
                   <div>
                     {commentsToShow.length > 1
                       ? <div>
-                          <div className="select right">
 
-                          </div>
+                          <div className="select right">
+                              <select
+                                value={sortMethod}
+                                onChange={event => {
+                                  changeSort(event.target.value)
+                                }}
+                              >
+                                <option value="score">Top Score</option>
+                                <option value="date">Most recent</option>
+                              </select>
+                            </div>
                           <h3>
                             {commentsToShow.length} comments:
                           </h3>
                         </div>
+
                       : <h3>
                           {commentsToShow.length} comment:
                         </h3>}
@@ -118,9 +129,10 @@ class PostInfo extends Component {
   }
 }
 
-function mapStateToProps({categories}){
+function mapStateToProps({sortMethod,categories}){
   return {
-    categories:categories.categories
+    categories:categories.categories,
+    sortMethod:sortMethod
   }
 }
 
@@ -128,7 +140,8 @@ function mapDispatchToProps(dispatch){
   return{
     deletePost: (id) => dispatch(deletePosts(id)),
     upVote: (id) => dispatch(upVoteAction(id)),
-    downVote: (id) => dispatch(downVoteAction(id))
+    downVote: (id) => dispatch(downVoteAction(id)),
+    changeSort: (value) => dispatch(changeSortAction(value))
   }
 }
 
