@@ -1,8 +1,9 @@
 import React,{ Component } from 'react'
 import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { deletePosts,upVoteAction,downVoteAction } from '../../actions/posts'
-import { showDate } from '../../utils/helpers'
+import { deletePosts,upVoteAction,downVoteAction,changeSortAction } from '../../actions/posts'
+import { showDate ,sortByDate, sortByScore } from '../../utils/helpers'
+
 
 class PostInfo extends Component {
 
@@ -19,19 +20,22 @@ class PostInfo extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts ,sortMethod,changeSort} = this.props
+    sortMethod === 'date' ? posts.sort(sortByDate) : posts.sort(sortByScore)
 
     return(
       <div className="container has-top-margin">
-        <div className="select right">
-          <select
 
-            onChange={() => {}}
-          >
-            <option value="score">Top Score</option>
-            <option value="date">Most recent</option>
-          </select>
-        </div>
+      <div className="select right">
+        {console.log(sortMethod)}
+        <select
+          value={sortMethod}
+          onChange={(e) => {changeSort(e.target.value)}}
+        >
+          <option value="score">Top Score</option>
+          <option value="date">Most recent</option>
+        </select>
+      </div>
 
       {posts.length > 0 && posts.map((post) => (
         <div
@@ -145,9 +149,10 @@ class PostInfo extends Component {
   }
 }
 
-function mapStateToProps({categories}){
+function mapStateToProps({sortMethod,categories,posts}){
   return {
-    categories:categories.categories
+    sortMethod:sortMethod,
+    categories:categories.categories,
   }
 }
 
@@ -155,7 +160,8 @@ function mapDispatchToProps(dispatch){
   return{
     deletePost: (id) => dispatch(deletePosts(id)),
     upVote: (id) => dispatch(upVoteAction(id)),
-    downVote: (id) => dispatch(downVoteAction(id))
+    downVote: (id) => dispatch(downVoteAction(id)),
+    changeSort: (value) => dispatch(changeSortAction(value))
   }
 }
 

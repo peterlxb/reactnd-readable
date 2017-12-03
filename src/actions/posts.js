@@ -30,6 +30,7 @@ export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const UPVOTE_COMMENT = 'UPVOTE_COMMENT'
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT'
+export const CHANGE_SORT = 'CHANGE_SORT'
 
 function getPosts(post,comments){
   return {
@@ -199,3 +200,10 @@ export const addCommentAction = (comment) => dispatch => {
           })
         })
     )
+
+    export const changeSortAction = (method) => {
+      return {
+        type:CHANGE_SORT,
+        method
+      }
+    }

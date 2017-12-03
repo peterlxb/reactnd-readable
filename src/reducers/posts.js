@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux'
-
 import {
   GET_ALL_POSTS,
   ADD_NEW_POST,
@@ -9,7 +7,8 @@ import {
   EDIT_POST,
   GET_POST,
   UP_VOTE,
-  DOWN_VOTE
+  DOWN_VOTE,
+  CHANGE_SORT
 } from '../actions/posts'
 
 
