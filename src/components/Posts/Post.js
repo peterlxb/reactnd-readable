@@ -9,7 +9,7 @@ class Posts extends Component {
   render() {
     const {posts} = this.props
     return(
-      <div className="readable-posts">
+      <div>
         <PostInfo posts={posts}/>
       </div>
     )

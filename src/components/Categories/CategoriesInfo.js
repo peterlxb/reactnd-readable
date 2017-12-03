@@ -32,7 +32,7 @@ class CategoriesInfo extends Component {
       <div className="container">
         <Header />
         <hr />
-        <div className="readable-posts">
+        <div>
           {postOfTheCategory.length > 0 &&   <PostInfo posts={postOfTheCategory}/>}
         </div>
       </div>

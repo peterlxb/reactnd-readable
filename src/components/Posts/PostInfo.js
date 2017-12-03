@@ -22,9 +22,19 @@ class PostInfo extends Component {
     const { posts } = this.props
 
     return(
-      <div>
+      <div className="container has-top-margin">
+        <div className="select right">
+          <select
+
+            onChange={() => {}}
+          >
+            <option value="score">Top Score</option>
+            <option value="date">Most recent</option>
+          </select>
+        </div>
+
       {posts.length > 0 && posts.map((post) => (
-        <div className="container content has-top-margin"
+        <div
           style={{ marginBottom: '50px' }} key={post.id}>
           <div className="columns">
 
