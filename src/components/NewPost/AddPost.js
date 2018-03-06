@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link,Redirect } from 'react-router-dom'
 import LogoImg from '../../images/readable-logo.png'
 import uuidv1 from 'uuid/v1'
 import { addPost } from '../../actions/posts'
@@ -16,6 +16,7 @@ class AddPost extends Component {
     body: '',
     notValid: false,
     success: false,
+    submitted: false
   }
 
   handleSubmit() {
@@ -39,7 +40,8 @@ class AddPost extends Component {
           category: '',
           author: '',
           body: '',
-          notValid: false
+          notValid: false,
+          submitted:true
         }))
 
         getAllPosts();
@@ -76,11 +78,15 @@ class AddPost extends Component {
   }
 
   render(){
-    const { categories } = this.props
+    const { categories } = this.props;
+    let redirect = null;
+    if(this.state.submitted) {
+      redirect = <Redirect to="/" />
+    }
     return(
 
         <div>
-
+            {redirect}
             <Header />
 
               <hr />
