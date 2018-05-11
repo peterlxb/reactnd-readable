@@ -18,7 +18,7 @@ import NotFound from './NotFound'
 
 class App extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getCategories();
     this.props.getPosts();
 
@@ -31,7 +31,6 @@ render() {
     return (
       <div>
         <Switch>
-
           <Route
             exact
             path ="/"
@@ -57,9 +56,8 @@ render() {
               path="/category/:url"
               render={({match}) =>
                 <CategoriesInfo
-                  categories={categories}
                   categoryPath={match.params.url}
-                  posts={posts}
+
                 />}
               />
 
@@ -78,10 +76,10 @@ render() {
     );
   }
 }
-function mapStateToProps({categories,posts}) {
+function mapStateToProps(state) {
   return {
-    categories: categories.categories,
-    posts: posts.posts,
+    categories: state.categories,
+    posts: state.posts,
 
   }
 }

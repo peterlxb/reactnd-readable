@@ -149,10 +149,10 @@ class PostInfo extends Component {
   }
 }
 
-function mapStateToProps({sortMethod,categories,posts}){
+function mapStateToProps(state){
   return {
-    sortMethod:sortMethod,
-    categories:categories.categories,
+    sortMethod:state.sortMethod,
+    categories:state.categories,
   }
 }
 

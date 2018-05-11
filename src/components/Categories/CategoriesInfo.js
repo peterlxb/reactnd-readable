@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
 import LogoImg from '../../images/readable-logo.png'
 import PostInfo from '../Posts/PostInfo'
 import Header from '../Header'
@@ -40,4 +41,11 @@ class CategoriesInfo extends Component {
   }
 }
 
-export default CategoriesInfo
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories,
+    posts:state.posts
+  }
+}
+
+export default connect(mapStateToProps)(CategoriesInfo);

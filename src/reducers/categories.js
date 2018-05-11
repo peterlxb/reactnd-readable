@@ -2,15 +2,10 @@ import {
   GET_CATEGORIES,
 } from '../actions/categories'
 
-const initialCategoryState = [];
-
-export const categories = (state={categories:[] },action) => {
+export const categories = (state=[],action) => {
   switch(action.type){
     case GET_CATEGORIES:
-      return{
-        ...state,
-        categories: action.categories
-      }
+      return action.categories
     default:
       return state
   }

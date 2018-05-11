@@ -13,17 +13,18 @@ import {
 
 
 
-export const posts = (state={posts:[]},action) => {
+export const posts = (state=[],action) => {
   switch(action.type) {
     case GET_ALL_POSTS:
       action.post.comments = action.comments
-      return{
-        posts:[...state.posts, action.post],
-      }
+      return [
+          ...state,
+          action.post
+      ]
     case ADD_NEW_POST:
       return {
         ...state,
-        posts: [...state.posts, action.post]
+        posts:[...state.posts, action.post]
       }
     case DELETE_POSTS:
       return {

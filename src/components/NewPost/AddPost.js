@@ -200,9 +200,9 @@ class AddPost extends Component {
   }
 }
 
-function mapStateToProps({categories}) {
+function mapStateToProps(state) {
   return {
-    categories: categories.categories
+    categories: state.categories
   }
 }
 
